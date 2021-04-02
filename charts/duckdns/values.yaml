@@ -1,0 +1,17 @@
+nameOverride: ""
+fullnameOverride: ""
+
+secretNameOverride: ""
+
+image:
+  repository: linuxserver/duckdns
+  pullPolicy: IfNotPresent
+  tag: latest
+
+subdomains: mmontes-dev,gotway
+
+timezone: Europe/Madrid
+
+resources: {}
+
+nodeSelector: {}
