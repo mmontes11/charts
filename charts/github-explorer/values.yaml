@@ -1,0 +1,30 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: mmontes11/github-explorer
+  pullPolicy: IfNotPresent
+  tag: "0.4.1"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingressRoute:
+  enabled: true
+  host: github-explorer.mmontes-dev.duckdns.org
+  entryPoints:
+    - websecure
+
+resources: {}
+
+replicaCount: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 50
+  targetMemoryUtilizationPercentage: 50
+
+nodeSelector: {}
