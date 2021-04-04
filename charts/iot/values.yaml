@@ -1,7 +1,7 @@
 nameOverride: ""
 fullnameOverride: ""
 
-secretNameOverride: iot
+secretNameOverride: ""
 
 back:
   image:
@@ -188,11 +188,11 @@ mongodb:
       uri: "mongodb://iot-mongodb:27017"
     serviceMonitor:
       additionalLabels:
-        release: kube-prometheus-stack
+        release: monitoring
 
 redis:
   prometheus-redis-exporter:
     redisAddress: redis://iot-redis:6379
     serviceMonitor:
       labels:
-        release: kube-prometheus-stack
+        release: monitoring

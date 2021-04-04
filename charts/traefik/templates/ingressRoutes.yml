@@ -1,0 +1,25 @@
+
+{{ $labels := include "traefik.labels" . }}
+{{ range $entrypoint := .Values.ingressRoutes }}
+{{ with $entrypoint }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .name }}
+  labels:
+    {{ $labels | nindent 4 }}
+spec:
+  entrypoints:
+  {{ range $entrypoint := .entrypoints }}
+    - {{ $entrypoint }}
+  {{ end }}
+  routes:
+    - kind: Rule
+      match: Host(`{{ .host }}`)
+      services:
+        - kind: Service
+          name: {{ .service }}
+          port: {{ .port }}
+{{ end }}
+---
+{{ end }}

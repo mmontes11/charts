@@ -26,7 +26,7 @@ readinessProbe:
 ingressRoute:
   enabled: true
   host: api.gotway.duckdns.org
-  entryPoints:
+  entrypoints:
     - websecure
 
 env: production
@@ -133,4 +133,4 @@ redis:
     redisAddress: redis://gotway-redis:6379
     serviceMonitor:
       labels:
-        release: kube-prometheus-stack
+        release: monitoring

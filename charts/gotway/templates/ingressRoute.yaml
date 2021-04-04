@@ -7,8 +7,8 @@ metadata:
   labels:
     {{ include "gotway.labels" $ | nindent 4 }}
 spec:
-  entryPoints:
-    {{ range $entrypoint := .Values.ingressRoute.entryPoints }}
+  entrypoints:
+    {{ range $entrypoint := .Values.ingressRoute.entrypoints }}
     - {{ $entrypoint }}
     {{ end }}
   routes:
