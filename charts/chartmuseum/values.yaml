@@ -81,7 +81,7 @@ chartmuseum:
       # disable use of index-cache.yaml
       DISABLE_STATEFILES: false
       # disable Prometheus metrics
-      DISABLE_METRICS: true
+      DISABLE_METRICS: false
       # disable all routes prefixed with /api
       DISABLE_API: false
       # allow chart versions to be re-uploaded

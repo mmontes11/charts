@@ -6,7 +6,7 @@ echo "☸️  Loading manifests ..."
 kubectl apply -f manifests/
 
 echo "🚀 Deploying monitoring ..."
-helm upgrade --install monitoring charts/monitoring -n monitoring
+helm upgrade monitoring charts/monitoring --install --wait --namespace monitoring
 
 charts=(
   traefik
@@ -15,10 +15,11 @@ charts=(
   iot
   crypto-trade
   gotway
+  mmontes-charts
+  gotway-charts
 )
- 
-for chart in "${charts[@]}"
-do
+
+for chart in "${charts[@]}"; do
   echo "🚀 Deploying ${chart} ..."
   chart_path="charts/${chart}"
   helm upgrade --install "$chart" "$chart_path"

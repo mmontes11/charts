@@ -1,0 +1,15 @@
+chartmuseum:
+  ingressRoute:
+    enabled: true
+    host: helm-charts.mmontes-dev.duckdns.org
+    entryPoints:
+      - websecure
+  chartmuseum:
+    env:
+      existingSecret: mmontes-charts
+      # Stores Enviromnt Variable to secret key name mappings
+      existingSecretMappings:
+        # username for basic http authentication
+        BASIC_AUTH_USER: BASIC_AUTH_USER
+        # password for basic http authentication
+        BASIC_AUTH_PASS: BASIC_AUTH_PASS
