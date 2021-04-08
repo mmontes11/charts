@@ -2,10 +2,13 @@
 
 set -e
 
-echo "☸️  Loading manifests ..."
+source ./scripts/common.sh
+update_repos
+
+echo "☸️  Loading manifests..."
 kubectl apply -f manifests/
 
-echo "🚀 Deploying monitoring ..."
+echo "🚀 Deploying monitoring..."
 helm upgrade monitoring charts/monitoring --install --wait --namespace monitoring
 
 charts=(
@@ -20,7 +23,7 @@ charts=(
 )
 
 for chart in "${charts[@]}"; do
-  echo "🚀 Deploying ${chart} ..."
+  echo "🚀 Deploying '${chart}'..."
   chart_path="charts/${chart}"
   helm upgrade --install "$chart" "$chart_path"
 done
