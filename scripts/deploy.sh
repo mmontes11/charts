@@ -9,10 +9,10 @@ echo "☸️  Loading manifests..."
 kubectl apply -f manifests/
 
 echo "🚀 Deploying monitoring..."
-# helm upgrade monitoring charts/monitoring --install --wait --namespace monitoring
+helm upgrade monitoring charts/monitoring --install --wait --namespace monitoring
 
 charts=(
-  # traefik
+  traefik
   duckdns
   github-explorer
   iot

@@ -35,7 +35,13 @@ api:
 
   env: production
 
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
 
   replicaCount: 1
 
@@ -62,7 +68,13 @@ publisher:
 
   numPublishers: 4
 
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
 
   replicaCount: 1
 
@@ -87,7 +99,13 @@ subscriber:
 
   numSubscribers: 4
 
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
 
   replicaCount: 1
 

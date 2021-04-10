@@ -22,7 +22,13 @@ back:
     timeoutSeconds: 3
     periodSeconds: 15
 
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
   replicaCount: 2
   autoscaling:
     enabled: true
@@ -98,7 +104,13 @@ front:
     type: ClusterIP
     port: 80
 
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
   replicaCount: 2
   autoscaling:
     enabled: true
@@ -183,7 +195,13 @@ nginx:
     type: ClusterIP
     port: 80
     
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: "128Mi"
+    limits:
+      cpu: 300m
+      memory: "512Mi"
   replicaCount: 2
   autoscaling:
     enabled: true
