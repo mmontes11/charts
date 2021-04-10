@@ -1,6 +1,0 @@
-dependencies:
-- name: chartmuseum
-  repository: file://../chartmuseum
-  version: 0.1.0
-digest: sha256:23c6c666110acdbb9390e950ea7f4b5f32c65555580fd1e681d6d53e912ec2f6
-generated: "2021-04-07T23:24:17.339611+02:00"
