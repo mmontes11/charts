@@ -19,6 +19,7 @@ spec:
       services:
         - kind: Service
           name: {{ .service }}
+          namespace: {{ .namespace }}
           port: {{ .port }}
 {{ end }}
 ---

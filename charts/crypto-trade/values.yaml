@@ -116,24 +116,27 @@ nats:
     pullPolicy: IfNotPresent
 
   reloader:
-    enabled: true
+    enabled: false
     image: connecteverything/nats-server-config-reloader:0.6.0
     pullPolicy: IfNotPresent
 
   exporter:
     enabled: true
-    image: synadia/prometheus-nats-exporter:0.5.0
+    image: natsio/prometheus-nats-exporter:0.7.0
     pullPolicy: IfNotPresent
     serviceMonitor:
       enabled: true
+      namespace: monitoring
+      labels:
+        release: monitoring
       path: /metrics
 
 clickhouse:
   timezone: "UTC"
 
   clickhouse:
-    image: "yandex/clickhouse-server"
-    imageVersion: "19.14"
+    image: "lunalabsltd/clickhouse-server"
+    imageVersion: "20.6.7.4-arm"
     imagePullPolicy: "IfNotPresent"
     
     replicas: "1"

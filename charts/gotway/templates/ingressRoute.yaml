@@ -17,5 +17,5 @@ spec:
       services:
         - kind: Service
           name: {{ $fullName }}
-          port: {{ .Values.service.externalPort }}
+          port: {{ .Values.service.interalPort }}
 {{ end }}

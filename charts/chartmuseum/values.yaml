@@ -3,7 +3,7 @@ fullnameOverride: ""
 
 ingressRoute:
   enabled: true
-  host: helm-charts.example.org
+  host: charts.example.org
   entryPoints:
     - websecure
 

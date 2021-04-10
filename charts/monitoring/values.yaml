@@ -70,7 +70,8 @@ kube-prometheus-stack:
     appNamespacesTarget: ".*"
 
     ## Labels for default rules
-    labels: {}
+    labels:
+      release: monitoring
     ## Annotations for default rules
     annotations: {}
 
@@ -780,6 +781,10 @@ kube-prometheus-stack:
         mongodb:
           gnetId: 2583
           revision: 2
+          datasource: Prometheus
+        nats:
+          gnetId: 13707
+          revision: 1
           datasource: Prometheus
 
   ## Component scraping the kube api server
