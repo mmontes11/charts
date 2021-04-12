@@ -8,6 +8,6 @@ Infrastructure and applications deployed on my [rpi k8s cluster](https://itnext.
 ### Usage
 
 ```bash
-$ helm repo add mmontes-charts https://charts.mmontes-dev.duckdns.org
-$ helm install iot mmontes-charts/iot
+$ helm repo add mmontes https://charts.mmontes-dev.duckdns.org
+$ helm install iot mmontes/iot
 ```
