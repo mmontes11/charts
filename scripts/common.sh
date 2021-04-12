@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function update_repos() {
+function update_deps() {
   echo "☸️  Updating repos..."
   helm repo add bitnami https://charts.bitnami.com/bitnami
   helm repo add chartmuseum https://chartmuseum.github.io/charts
@@ -10,4 +10,20 @@ function update_repos() {
   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
   helm repo add traefik https://helm.traefik.io/traefik
   helm repo update
+
+  echo "☸️  Updating deps..."
+  charts=(
+    redis
+    mongodb
+    monitoring
+    traefik
+    duckdns
+    github-explorer
+    iot
+    crypto-trade
+    mmontes-charts
+  )
+  for ch in "${charts[@]}"; do
+    helm dep update "charts/$ch"
+  done
 }

@@ -6,7 +6,7 @@ helm plugin install https://github.com/chartmuseum/helm-push.git
 helm repo add mmontes https://charts.mmontes-dev.duckdns.org
 
 source ./scripts/common.sh
-update_repos
+update_deps
 
 for path in $(ls -d charts/*); do
     name=$(basename "$path")

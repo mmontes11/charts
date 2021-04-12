@@ -3,7 +3,7 @@
 set -e
 
 source ./scripts/common.sh
-update_repos
+update_deps
 
 echo "☸️  Loading manifests..."
 kubectl apply -f manifests/
