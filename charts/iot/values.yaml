@@ -7,7 +7,7 @@ back:
   image:
     repository: mmontes11/iot-back
     pullPolicy: IfNotPresent
-    tag: "v3.4.0"
+    tag: "v3.5.0"
 
   service:
     type: ClusterIP
@@ -59,7 +59,7 @@ biot:
   image:
     repository: mmontes11/iot-biot
     pullPolicy: IfNotPresent
-    tag: "v3.4.0"
+    tag: "v3.5.0"
 
   service:
     type: ClusterIP
@@ -98,7 +98,7 @@ front:
   image:
     repository: mmontes11/iot-front
     pullPolicy: Always
-    tag: "v3.4.0"
+    tag: "v3.5.0"
 
   service:
     type: ClusterIP
@@ -126,7 +126,7 @@ thing:
   image:
     repository: mmontes11/iot-thing
     pullPolicy: IfNotPresent
-    tag: "v3.4.0"
+    tag: "v3.5.0"
 
   service:
     type: ClusterIP
@@ -141,7 +141,7 @@ worker:
   image:
     repository: mmontes11/iot-worker
     pullPolicy: IfNotPresent
-    tag: "v3.4.0"
+    tag: "v3.5.0"
 
   service:
     type: ClusterIP
@@ -170,7 +170,7 @@ mosquitto:
   image:
     repository: mmontes11/iot-mosquitto
     pullPolicy: IfNotPresent
-    tag: v3.4.0
+    tag: v3.5.0
 
   service:
     type: ClusterIP
@@ -184,7 +184,7 @@ nginx:
   image:
     repository: mmontes11/iot-nginx
     pullPolicy: IfNotPresent
-    tag: v3.4.0
+    tag: v3.5.0
 
   ingressRoute:
     host: iot.mmontes-dev.duckdns.org
