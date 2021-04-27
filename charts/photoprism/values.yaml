@@ -1,0 +1,77 @@
+nameOverride: ""
+fullnameOverride: ""
+
+secretNameOverride: ""
+
+image:
+  repository: mmontes11/photoprism-cron
+  tag: "v0.0.1"
+  pullPolicy: IfNotPresent
+
+config:
+  PHOTOPRISM_DEBUG: true
+  PHOTOPRISM_PUBLIC: false
+  PHOTOPRISM_READONLY: false
+  PHOTOPRISM_HTTP_COMPRESSION: "gzip"
+  PHOTOPRISM_SITE_TITLE: "Media"
+  PHOTOPRISM_SITE_CAPTION: "Your media center"
+  PHOTOPRISM_SITE_AUTHOR: "mmontes"
+
+persistence:
+  enabled: true
+
+  nas: &nas my.nas.hostname
+  originalsPath: &originalsPath /photoprism/originals
+  importPath: &importPath /photoprism/import
+  storagePath:   &storagePath    /photoprism/storage
+
+  volumes:
+  - name: originals
+    nfs:
+      server: *nas
+      path: /photoprism/originals
+  - name: import
+    nfs:
+      server: *nas
+      path: /photoprism/import
+  - name: storage
+    nfs:
+      server: *nas
+      path: /photoprism/storage
+      
+  volumeMounts:
+  - name: originals
+    mountPath: *originalsPath
+  - name: import
+    mountPath: *importPath
+  - name: storage
+    mountPath: *storagePath
+
+database:
+  driver: mysql
+  host: photoprism-mariadb
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingressRoute:
+  enabled: true
+  host: photoprism.example.org
+  entryPoints:
+    - websecure
+
+resources:
+  requests:
+    memory: 1Gi
+    cpu: 500m
+
+replicaCount: 1
+
+nodeSelector:
+  kubernetes.io/arch: arm64
+
+mariadb:
+  secretNameOverride: photoprism
+  nodeSelector:
+    kubernetes.io/arch: arm64

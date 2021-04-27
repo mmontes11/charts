@@ -21,6 +21,8 @@ charts=(
   gotway
   mmontes-charts
   gotway-charts
+  mmontes-media
+  xiaowen-media
 )
 
 for chart in "${charts[@]}"; do

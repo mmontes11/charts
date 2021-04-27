@@ -1,0 +1,6 @@
+dependencies:
+- name: photoprism
+  repository: file://../photoprism
+  version: 0.1.0
+digest: sha256:39529e2b8653f3775f0a6936a19ddcbff39897e7dc76040bb53cfa2eacbcf611
+generated: "2021-04-29T14:03:37.426421+02:00"

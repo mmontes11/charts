@@ -1,0 +1,40 @@
+{{ $fullName := include "mariadb.fullname" . }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ $fullName  }}
+  labels:
+    {{ include "mariadb.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{ include "mariadb.selectorLabels" . | nindent 6 }}
+  serviceName: {{ $fullName  }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{ include "mariadb.selectorLabels" . | nindent 8 }}
+    spec:
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      containers:
+      - name: mariadb
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - secretRef:
+            name: {{ include "mariadb.secret" . }}
+        resources:
+          {{ toYaml .Values.resources | nindent 12 }}
+        ports:
+        - containerPort: {{ .Values.port }}
+        volumeMounts:
+        - name: {{ $fullName }}
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: {{ $fullName }}
+        persistentVolumeClaim:
+          claimName: {{ $fullName  }}

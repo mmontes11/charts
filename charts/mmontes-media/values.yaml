@@ -1,0 +1,54 @@
+photoprism:
+  secretNameOverride: mmontes-media
+
+  config:
+    PHOTOPRISM_SITE_TITLE: "Media"
+    PHOTOPRISM_SITE_CAPTION: "mmontes media center"
+    PHOTOPRISM_SITE_AUTHOR: "mmontes"
+
+  persistence:
+    enabled: true
+
+    nas: &nas 192.168.0.120
+    originalsPath: &originalsPath /photoprism/originals
+    importPath: &importPath /photoprism/import
+    storagePath:   &storagePath    /photoprism/storage
+
+    volumes:
+    - name: originals
+      nfs:
+        server: *nas
+        path: /volume1/homes/mmontes
+    - name: import
+      nfs:
+        server: *nas
+        path: /volume1/photoprism/mmontes/import
+    - name: storage
+      nfs:
+        server: *nas
+        path: /volume1/photoprism/mmontes/storage
+        
+    volumeMounts:
+    - name: originals
+      mountPath: *originalsPath
+    - name: import
+      mountPath: *importPath
+    - name: storage
+      mountPath: *storagePath
+
+  database:
+    driver: mysql
+    host: mmontes-media-mariadb
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  ingressRoute:
+    enabled: true
+    host: media.mmontes-dev.duckdns.org
+    entryPoints:
+      - websecure
+
+  mariadb:
+    secretNameOverride: mmontes-media

@@ -1,0 +1,90 @@
+{{ $secret := include "photoprism.secret" . }}
+{{ $fullName := include "photoprism.fullname" . }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "photoprism.fullname" . }}
+  labels:
+    {{ include "photoprism.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{ include "photoprism.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "photoprism.fullname" . }}
+  replicas: {{ .Values.replicaCount | default 1 }}
+  template:
+    metadata:
+      labels:
+        {{ include "photoprism.selectorLabels" . | nindent 8 }}
+    spec:
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      containers:
+      - name: photoprism
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: {{ $fullName }}-environment
+        - configMapRef:
+            name: {{ $fullName }}-storage
+        env:
+          - name: PHOTOPRISM_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret }}
+                key: ADMIN_PASSWORD
+        {{ with .Values.database }}
+        {{ if eq .driver "mysql" }}
+          - name: PHOTOPRISM_DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret }}
+                key: MYSQL_DATABASE
+          - name: PHOTOPRISM_DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret }}
+                key: MYSQL_USER
+          - name: PHOTOPRISM_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret }}
+                key: MYSQL_PASSWORD
+        {{ else if eq .driver "sqlite" }}
+          - name: PHOTOPRISM_DATABASE_DSN
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret }}
+                key: DATABASE_DSN
+        {{ end }}
+        {{ end }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        resources:
+          {{ toYaml .Values.resources | nindent 12 }}
+        ports:
+        - containerPort: 2342
+          name: http
+        volumeMounts:
+          {{ toYaml .Values.persistence.volumeMounts | nindent 8 }}
+    {{ if and .Values.persistence.enabled .Values.persistence.volumes }}
+      volumes:
+      {{ toYaml .Values.persistence.volumes | nindent 6 }}
+    {{ else if eq .Values.persistence.enabled false }}
+      volumes:
+      - name: originals
+        emptyDir: {}
+      - name: import
+        emptyDir: {}
+      - name: storage
+        emptyDir: {}
+    {{ end }}

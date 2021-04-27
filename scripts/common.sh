@@ -16,6 +16,7 @@ function update_deps() {
     redis
     mongodb
     monitoring
+    photoprism
     traefik
     duckdns
     pi-hole
@@ -23,6 +24,8 @@ function update_deps() {
     iot
     crypto-trade
     mmontes-charts
+    mmontes-media
+    xiaowen-media
   )
   for ch in "${charts[@]}"; do
     helm dep update "charts/$ch"

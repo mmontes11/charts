@@ -1,0 +1,17 @@
+nameOverride: ""
+fullnameOverride: ""
+
+secretNameOverride: ""
+
+image:
+  repository: mariadb
+  tag: "10.6.0"
+  pullPolicy: IfNotPresent
+
+storage: 4Gi
+
+port: 3306
+
+resources: {}
+
+nodeSelector: {}

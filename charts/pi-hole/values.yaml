@@ -24,7 +24,8 @@ dns:
     - media.mmontes-dev.duckdns.org	
     - mmontes-dev.duckdns.org
     - pi-hole.mmontes-dev.duckdns.org
-    - traefik.mmontes-dev.duckdns.org	
+    - traefik.mmontes-dev.duckdns.org
+    - xiaomedia.mmontes-dev.duckdns.org
   - ip: 192.168.0.101
     domains:
     - k8s-worker0
