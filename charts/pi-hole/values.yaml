@@ -1,0 +1,30 @@
+nameOverride: ""
+fullnameOverride: ""
+secretNameOverride: ""
+
+image:
+  repository: "pihole/pihole"
+  pullPolicy: IfNotPresent
+  tag: "v5.8.1"
+
+config:
+  TZ: UTC
+
+ingressRoute:
+  host: pi-hole.mmontes-dev.duckdns.org
+  entryPoints:
+    - websecure
+
+service:
+  type: NodePort
+  httpPort: 80
+  dnsPort: 53
+  dhcpPort: 67
+
+storage:
+  data: 500Mi
+  dnsmasq: 500Mi
+
+resources: {}
+
+nodeSelector: {}

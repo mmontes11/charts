@@ -1,0 +1,27 @@
+{{ $fullName := include "pi-hole.fullname" . }}
+{{ $labels := include "pi-hole.labels" . }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-data
+  labels:
+    {{ include "pi-hole.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storage.data }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-dnsmasq
+  labels:
+    {{ include "pi-hole.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storage.dnsmasq }}

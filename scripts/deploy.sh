@@ -14,6 +14,7 @@ helm upgrade monitoring charts/monitoring --install --wait --namespace monitorin
 charts=(
   traefik
   duckdns
+  pi-hole
   github-explorer
   iot
   crypto-trade

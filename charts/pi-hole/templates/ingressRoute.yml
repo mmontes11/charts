@@ -1,0 +1,19 @@
+{{ $fullName := include "pi-hole.fullname" . }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ include "pi-hole.labels" . | nindent 4 }}
+spec:
+  entryPoints:
+    {{ range $entrypoint := .Values.ingressRoute.entryPoints }}
+    - {{ $entrypoint }}
+    {{ end }}
+  routes:
+    - kind: Rule
+      match: Host(`{{ .Values.ingressRoute.host }}`)
+      services:
+        - kind: Service
+          name: {{ $fullName }}-http
+          port: {{ .Values.service.httpPort }}

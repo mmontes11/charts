@@ -1,0 +1,59 @@
+{{ $secret := include "pi-hole.secret" . }}
+{{ $fullName := include "pi-hole.fullname" . }}
+{{ $selectorLabels := include "pi-hole.selectorLabels" . }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "pi-hole.fullname" . }}
+  labels:
+    {{ include "pi-hole.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{ $selectorLabels | nindent 6 }}
+  serviceName: {{ $fullName }}
+  template:
+    metadata:
+      labels:
+        {{ $selectorLabels | nindent 8 }}
+    spec:
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      containers:
+      - name: {{ $fullName }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - configMapRef: 
+            name: {{ $fullName }}
+        - secretRef: 
+            name: {{ $secret }}
+        {{ with .Values.resources }}
+        resources:
+          {{ toYaml . | nindent 12 }}
+        {{ end }}
+        ports:
+        - containerPort: {{ .Values.service.httpPort }}
+          name: http
+        - containerPort: {{ .Values.service.dnsPort }}
+          protocol: TCP
+          name: dns-tcp
+        - containerPort: {{ .Values.service.dnsPort }}
+          protocol: UDP
+          name: dns-udp
+        - containerPort: {{ .Values.service.dhcpPort }}
+          name: dhcp
+        volumeMounts:
+          - name: {{ $fullName }}-data
+            mountPath: /etc/pihole
+          - name: {{ $fullName }}-dnsmasq
+            mountPath: /etc/dnsmasq.d
+      volumes:
+      - name: {{ $fullName }}-data
+        persistentVolumeClaim:
+          claimName: {{ $fullName  }}-data
+      - name: {{ $fullName }}-dnsmasq
+        persistentVolumeClaim:
+          claimName: {{ $fullName  }}-dnsmasq

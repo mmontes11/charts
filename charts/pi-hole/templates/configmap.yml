@@ -1,0 +1,11 @@
+{{ $fullName := include "pi-hole.fullname" . }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ include "pi-hole.labels" . | nindent 4 }}
+data:
+{{- range $key, $value := .Values.config }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}

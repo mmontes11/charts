@@ -18,6 +18,7 @@ function update_deps() {
     monitoring
     traefik
     duckdns
+    pi-hole
     github-explorer
     iot
     crypto-trade
