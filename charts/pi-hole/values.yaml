@@ -10,6 +10,34 @@ image:
 config:
   TZ: UTC
 
+dns: 
+  - ip: 192.168.0.100
+    domains:
+    - charts.gotway.duckdns.org
+    - charts.mmontes-dev.duckdns.org	
+    - github-explorer.mmontes-dev.duckdns.org	
+    - gotway.duckdns.org
+    - grafana.mmontes-dev.duckdns.org	
+    - iot.mmontes-dev.duckdns.org
+    - k8s-master	
+    - kubernetes.mmontes-dev.duckdns.org
+    - media.mmontes-dev.duckdns.org	
+    - mmontes-dev.duckdns.org
+    - pi-hole.mmontes-dev.duckdns.org
+    - traefik.mmontes-dev.duckdns.org	
+  - ip: 192.168.0.101
+    domains:
+    - k8s-worker0
+  - ip: 192.168.0.102
+    domains:
+    - k8s-worker1
+  - ip: 192.168.0.103
+    domains:
+    - k8s-worker2
+  - ip: 192.168.0.120
+    domains:
+    - nas
+
 ingressRoute:
   host: pi-hole.mmontes-dev.duckdns.org
   entryPoints:

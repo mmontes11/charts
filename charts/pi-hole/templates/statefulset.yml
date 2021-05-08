@@ -50,6 +50,20 @@ spec:
             mountPath: /etc/pihole
           - name: {{ $fullName }}-dnsmasq
             mountPath: /etc/dnsmasq.d
+      initContainers:
+      - name: {{ $fullName }}-init-dns
+        image: busybox:1.33.1
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args:
+        - {{ range $entry := .Values.dns }}
+          {{ range $entry.domains }}
+          echo '{{ $entry.ip }} {{ . }}' >> /workdir/custom.list;
+          {{ end }}
+          {{ end }}
+        volumeMounts:
+        - name: {{ $fullName }}-data
+          mountPath: "/workdir"
       volumes:
       - name: {{ $fullName }}-data
         persistentVolumeClaim:
