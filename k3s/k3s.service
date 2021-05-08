@@ -26,4 +26,5 @@ ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
     --kubelet-arg containerd=/run/k3s/containerd/containerd.sock \
-    --kube-apiserver-arg service-node-port-range=80-32767
+    --kube-apiserver-arg service-node-port-range=53-32767 \
+    --resolv-conf=/etc/resolv.conf
