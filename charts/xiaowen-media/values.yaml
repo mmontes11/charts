@@ -5,6 +5,7 @@ photoprism:
     PHOTOPRISM_SITE_TITLE: "ChampiCloud"
     PHOTOPRISM_SITE_CAPTION: "xiaowen media center"
     PHOTOPRISM_SITE_AUTHOR: "xiaowen"
+    PHOTOPRISM_AUTO_INDEX_CRON: "* 4 * * *"
 
   persistence:
     enabled: true

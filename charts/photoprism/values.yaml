@@ -4,8 +4,8 @@ fullnameOverride: ""
 secretNameOverride: ""
 
 image:
-  repository: mmontes11/photoprism-cron
-  tag: "v0.0.1"
+  repository: mmontes11/photoprism-auto-index
+  tag: "v0.0.6"
   pullPolicy: IfNotPresent
 
 config:
@@ -16,6 +16,7 @@ config:
   PHOTOPRISM_SITE_TITLE: "Media"
   PHOTOPRISM_SITE_CAPTION: "Your media center"
   PHOTOPRISM_SITE_AUTHOR: "mmontes"
+  PHOTOPRISM_AUTO_INDEX_CRON: "* 6 * * *"
 
 persistence:
   enabled: true
@@ -63,8 +64,8 @@ ingressRoute:
 
 resources:
   requests:
-    memory: 1Gi
-    cpu: 500m
+    memory: 2Gi
+    cpu: 1
 
 replicaCount: 1
 
