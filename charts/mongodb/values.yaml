@@ -1,14 +1,32 @@
-mongodb:
-  image:
-    repository: mongo
-    tag: 4.4.4
-  architecture: standalone
-  auth:
-    enabled: false
-  persistence:
-    enabled: true
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: mongo
+  pullPolicy: IfNotPresent
+  tag: 4.4.4
+
+storage: 8Gi
+
+port: 27017
+
+backup:
+  enabled: true
+  secretNameOverride: ""
+  storage: 
     size: 8Gi
-    mountPath: /data/db
+    class: nfs
+  cron: 
+    image:
+      repository: mmontes11/mongodb-backup
+      pullPolicy: IfNotPresent
+      tag: vdebug
+    schedule: "* 3 * * *"
+
+resources: {}
+
+nodeSelector:
+  kubernetes.io/arch: arm64
 
 prometheus-mongodb-exporter:
   image:

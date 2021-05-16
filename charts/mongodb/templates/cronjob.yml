@@ -1,0 +1,33 @@
+{{ $fullName := include "mongodb.fullname" . }}
+{{ if .Values.backup.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ $fullName }}-backup
+  labels:
+    {{ include "mongodb.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.backup.cron.schedule | quote }}
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ $fullName }}-backup
+            {{ with .Values.backup.cron.image  }}
+            image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
+            imagePullPolicy: {{ .pullPolicy }}
+            {{ end }}
+            envFrom:
+              - secretRef:
+                  name: {{ include "mongodb.secret" . }}
+            volumeMounts:
+            - name: {{ $fullName  }}-backup
+              mountPath: /backup
+          restartPolicy: OnFailure
+          volumes:
+          - name: {{ $fullName  }}-backup
+            persistentVolumeClaim:
+              claimName: {{ $fullName }}-backup
+{{ end }}
