@@ -19,6 +19,7 @@ function update_deps() {
     mongodb
     monitoring
     photoprism
+    chartmuseum
     traefik
     duckdns
     pi-hole

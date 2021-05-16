@@ -21,7 +21,6 @@ charts=(
   crypto-trade
   gotway
   mmontes-charts
-  gotway-charts
   mmontes-media
   xiaowen-media
 )
