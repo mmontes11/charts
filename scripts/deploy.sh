@@ -12,6 +12,7 @@ echo "🚀 Deploying monitoring..."
 helm upgrade monitoring charts/monitoring --install --wait --namespace monitoring
 
 charts=(
+  nfs-provisioner
   traefik
   duckdns
   pi-hole

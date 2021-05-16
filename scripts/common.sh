@@ -9,10 +9,12 @@ function update_deps() {
   helm repo add nats https://nats-io.github.io/k8s/helm/charts/
   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
   helm repo add traefik https://helm.traefik.io/traefik
+  helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
   helm repo update
 
   echo "☸️  Updating deps..."
   charts=(
+    nfs-provisioner
     redis
     mongodb
     monitoring
