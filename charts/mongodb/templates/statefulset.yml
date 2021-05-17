@@ -21,7 +21,7 @@ spec:
         {{ toYaml . | nindent 8 }}
       {{ end }}
       containers:
-        - name: {{ $fullName  }}
+        - name: mongo
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
@@ -35,10 +35,37 @@ spec:
           {{ end }}
           ports:
             - containerPort: {{ .Values.port }}
+          livenessProbe:
+            exec:
+              command:
+              - mongo
+              - --eval
+              - "db.adminCommand('ping')"
+            {{ with .Values.livenessProbe }}
+            {{ toYaml . | nindent 12 }}
+            {{ end }}
+          readinessProbe:
+            exec:
+              command:
+              - mongo
+              - --eval
+              - "db.adminCommand('ping')"
+            {{ with .Values.readinessProbe }}
+            {{ toYaml . | nindent 12 }}
+            {{ end }}
           volumeMounts:
             - name: {{ $fullName  }}
               mountPath: /data/db
+            {{ if .Values.backup.enabled }}
+            - name: {{ $fullName  }}-backup
+              mountPath: /backup
+            {{ end }}
       volumes:
         - name: {{ $fullName  }}
           persistentVolumeClaim:
             claimName: {{ $fullName  }}
+        {{ if .Values.backup.enabled }}
+        - name: {{ $fullName  }}-backup
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}-backup
+        {{ end }}

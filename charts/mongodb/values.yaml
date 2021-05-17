@@ -4,11 +4,19 @@ fullnameOverride: ""
 image:
   repository: mongo
   pullPolicy: IfNotPresent
-  tag: 4.2.3
+  tag: 4.4.4
 
 storage: 8Gi
 
 port: 27017
+
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 10
 
 backup:
   enabled: true
