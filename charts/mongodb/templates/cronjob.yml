@@ -7,21 +7,27 @@ metadata:
   labels:
     {{ include "mongodb.labels" . | nindent 4 }}
 spec:
-  schedule: {{ .Values.backup.cron.schedule | quote }}
+  schedule: {{ .Values.backup.cron | quote }}
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
         spec:
+          {{ with .Values.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | nindent 16 }}
+          {{ end }}
           containers:
           - name: {{ $fullName }}-backup
-            {{ with .Values.backup.cron.image  }}
-            image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
-            imagePullPolicy: {{ .pullPolicy }}
-            {{ end }}
-            envFrom:
-              - secretRef:
-                  name: {{ include "mongodb.secret" . }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command:
+              - mongodump
+            args:
+              - "--uri"
+              - "mongodb://{{ $fullName  }}:27017"
+              - "--out"
+              - "/backup"
             volumeMounts:
             - name: {{ $fullName  }}-backup
               mountPath: /backup

@@ -49,11 +49,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "mongodb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-
-{{/*
-Secret
-*/}}
-{{- define "mongodb.secret" -}}
-{{- default .Chart.Name .Values.backup.secretNameOverride  | trunc 63 | trimSuffix "-" }}
-{{- end }}

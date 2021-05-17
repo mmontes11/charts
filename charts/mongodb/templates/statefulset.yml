@@ -24,6 +24,11 @@ spec:
         - name: {{ $fullName  }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+          - mongod
+          args: 
+          - --bind_ip=0.0.0.0
+          - --dbpath=/data/db    
           {{ with .resources }}
           resources:
             {{ toYaml . | nindent 12 }}
