@@ -219,7 +219,7 @@ mongodb:
     storage: 
       size: 8Gi
       class: nfs
-    cron:  "* 3 * * *"
+    cron:  "0 3 * * *"
   prometheus-mongodb-exporter:
     mongodb:
       uri: "mongodb://iot-mongodb:27017"

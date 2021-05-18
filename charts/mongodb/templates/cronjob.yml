@@ -25,7 +25,7 @@ spec:
               - mongodump
             args:
               - "--uri"
-              - "mongodb://{{ $fullName }}:27017"
+              - "mongodb://{{ $fullName }}:{{ .Values.port }}"
               - "--out"
               - "/backup"
             volumeMounts:

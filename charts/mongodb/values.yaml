@@ -23,7 +23,7 @@ backup:
   storage: 
     size: 8Gi
     class: nfs
-  cron:  "* 3 * * *"
+  cron:  "0 3 * * *"
 
 resources: {}
 
