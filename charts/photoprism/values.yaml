@@ -17,7 +17,7 @@ config:
   PHOTOPRISM_SITE_CAPTION: "Your media center"
   PHOTOPRISM_SITE_AUTHOR: "mmontes"
   PHOTOPRISM_WORKERS: 2
-  PHOTOPRISM_AUTO_INDEX_CRON: "* 6 * * *"
+  PHOTOPRISM_AUTO_INDEX_CRON: "0 6 * * *"
 
 persistence:
   enabled: true

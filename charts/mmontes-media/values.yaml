@@ -5,7 +5,7 @@ photoprism:
     PHOTOPRISM_SITE_TITLE: "Media"
     PHOTOPRISM_SITE_CAPTION: "mmontes media center"
     PHOTOPRISM_SITE_AUTHOR: "mmontes"
-    PHOTOPRISM_AUTO_INDEX_CRON: "* 1 * * *"
+    PHOTOPRISM_AUTO_INDEX_CRON: "0 1 * * *"
 
   persistence:
     enabled: true
