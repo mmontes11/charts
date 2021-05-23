@@ -2,7 +2,7 @@
 {{ $fullName := include "pi-hole.fullname" . }}
 {{ $selectorLabels := include "pi-hole.selectorLabels" . }}
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ include "pi-hole.fullname" . }}
   labels:
@@ -11,7 +11,6 @@ spec:
   selector:
     matchLabels:
       {{ $selectorLabels | nindent 6 }}
-  serviceName: {{ $fullName }}
   template:
     metadata:
       labels:

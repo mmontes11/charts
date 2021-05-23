@@ -1,7 +1,7 @@
 {{ $secret := include "photoprism.secret" . }}
 {{ $fullName := include "photoprism.fullname" . }}
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ include "photoprism.fullname" . }}
   labels:
@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       {{ include "photoprism.selectorLabels" . | nindent 6 }}
-  serviceName: {{ include "photoprism.fullname" . }}
   replicas: {{ .Values.replicaCount | default 1 }}
   template:
     metadata:
