@@ -786,13 +786,9 @@ kube-prometheus-stack:
           gnetId: 13707
           revision: 1
           datasource: Prometheus
-        go-processes:
+        go:
           gnetId: 6671
           revision: 2
-          datasource: Prometheus
-        go-metrics:
-          gnetId: 13722
-          revision: 3
           datasource: Prometheus
 
   ## Component scraping the kube api server
