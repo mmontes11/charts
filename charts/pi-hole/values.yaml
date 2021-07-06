@@ -13,6 +13,8 @@ config:
 dns: 
   - ip: 192.168.0.100
     domains:
+    - api.gotway.duckdns.org
+    - catalog.gotway.duckdns.org
     - charts.gotway.duckdns.org
     - charts.mmontes-dev.duckdns.org	
     - github-explorer.mmontes-dev.duckdns.org	
@@ -24,6 +26,7 @@ dns:
     - media.mmontes-dev.duckdns.org	
     - mmontes-dev.duckdns.org
     - pi-hole.mmontes-dev.duckdns.org
+    - stock.gotway.duckdns.org
     - traefik.mmontes-dev.duckdns.org
     - xiaomedia.mmontes-dev.duckdns.org
   - ip: 192.168.0.101
