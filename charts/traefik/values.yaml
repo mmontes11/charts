@@ -26,7 +26,7 @@ ingressRoutes:
     entrypoints:
       - websecure
 
-serviceMonitor: 
+serviceMonitor:
   enabled: true
   namespace: monitoring
   labels:
@@ -238,24 +238,27 @@ traefik:
     - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
     - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
     # - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-    - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
-    - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=8.8.8.8:53"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=5"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablepropagationcheck=true"
     - "--metrics.prometheus=true"
     - "--serverstransport.insecureskipverify"
   # Environment variables to be passed to Traefik's binary
   env:
-  # - name: SOME_VAR
-  #   value: some-var-value
-  # - name: SOME_VAR_FROM_CONFIG_MAP
-  #   valueFrom:
-  #     configMapRef:
-  #       name: configmap-name
-  #       key: config-key
-  - name: DUCKDNS_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: duckdns
-        key: TOKEN
+    # - name: SOME_VAR
+    #   value: some-var-value
+    # - name: SOME_VAR_FROM_CONFIG_MAP
+    #   valueFrom:
+    #     configMapRef:
+    #       name: configmap-name
+    #       key: config-key
+    - name: DUCKDNS_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: duckdns
+          key: TOKEN
 
   envFrom:
     # - configMapRef:
