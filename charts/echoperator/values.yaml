@@ -1,0 +1,37 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: mmontes11/echoperator
+  pullPolicy: IfNotPresent
+  tag: v0.0.1
+
+env: production
+
+logLevel: info
+
+operatorNamespace: default
+
+numWorkers: 4
+
+ha:
+  enabled: false
+  leaderElection:
+    lockName: echoperator
+    leaseDurationSeconds: 15
+    renewDeadlineSeconds: 10
+    retryPeriodSeconds: 2
+  replicaCount: 2
+
+monitoring:
+  enabled: true
+  path: /metrics
+  port: 2112
+  namespace: monitoring
+  interval: 10s
+  labels:
+    release: monitoring
+
+resources: {}
+
+nodeSelector: {}

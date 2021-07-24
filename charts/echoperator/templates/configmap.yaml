@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "echoperator.fullname" . }}
+  labels:
+    {{ include "echoperator.labels" . | nindent 4 }}
+data:
+  NAMESPACE: {{ .Values.operatorNamespace }}
+  NUM_WORKERS: {{ .Values.numWorkers | quote }}
+  HA_ENABLED: {{ .Values.ha.enabled | quote }}
+  {{ if .Values.ha.enabled }}
+  HA_LEASE_LOCK_NAME: {{ .Values.ha.leaderElection.lockName }}
+  HA_LEASE_DURATION_SECONDS: {{ .Values.ha.leaderElection.leaseDurationSeconds | quote }}
+  HA_RENEW_DEADLINE_SECONDS: {{ .Values.ha.leaderElection.renewDeadlineSeconds | quote }}
+  HA_RETRY_PERIOD_SECONDS: {{ .Values.ha.leaderElection.retryPeriodSeconds | quote }}
+  {{ end }}
+  METRICS_ENABLED: {{ .Values.monitoring.enabled | quote }}
+  {{ if .Values.monitoring.enabled }}
+  METRICS_PATH: {{ .Values.monitoring.path }}
+  METRICS_PORT: {{ .Values.monitoring.port | quote }}
+  {{ end }}
+  ENV: {{ .Values.env }}
+  LOG_LEVEL: {{ .Values.logLevel }}
