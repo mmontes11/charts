@@ -10,18 +10,15 @@ env: production
 
 logLevel: info
 
-operatorNamespace: default
-
 numWorkers: 4
 
 ha:
-  enabled: false
+  enabled: true
   leaderElection:
-    lockName: echoperator
     leaseDurationSeconds: 15
     renewDeadlineSeconds: 10
     retryPeriodSeconds: 2
-  replicaCount: 2
+  replicaCount: 3
 
 monitoring:
   enabled: true

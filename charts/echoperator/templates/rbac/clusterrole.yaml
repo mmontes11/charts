@@ -1,0 +1,45 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "echoperator.fullname" . }}
+  labels:
+    {{ include "echoperator.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - mmontes.io
+    resources:
+      - echos
+      - scheduledechos
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+  {{ if .Values.ha.enabled }}
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - watch
+      - update
+  {{ end }}

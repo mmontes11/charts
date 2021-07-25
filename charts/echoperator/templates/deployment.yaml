@@ -18,6 +18,7 @@ spec:
       labels:
         {{ $selectorLabels  | nindent 8 }}
     spec:
+      serviceAccountName: {{ $fullName }}
       containers:
         - name: {{ $fullName }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
