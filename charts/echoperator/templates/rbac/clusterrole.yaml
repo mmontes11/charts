@@ -41,5 +41,6 @@ rules:
     verbs:
       - get
       - watch
+      - create
       - update
   {{ end }}
