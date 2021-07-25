@@ -1,6 +1,6 @@
 {{ $fullName := include "mongodb.fullname" . }}
 {{ if .Values.backup.enabled }}
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ $fullName }}-backup
