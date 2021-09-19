@@ -1,0 +1,46 @@
+{{ $fullName := include "cockroachdb-operator.fullname" . }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ include "cockroachdb-operator.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{ include "cockroachdb-operator.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{ include "cockroachdb-operator.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: cockroach-operator-sa
+      containers:
+        - name: {{ $fullName }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - -zap-log-level
+            - {{ .Values.logLevel }}
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: {{ $fullName }}
+          envFrom:
+            - configMapRef:
+                name: {{ $fullName }}
+          {{ with .Values.resources }}
+          resources:
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
