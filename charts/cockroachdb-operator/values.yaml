@@ -1,0 +1,13 @@
+image:
+  repository: cockroachdb/cockroach-operator
+  pullPolicy: IfNotPresent
+  tag: v2.1.0
+
+nameOverride: cockroachdb-operator
+fullnameOverride: cockroachdb-operator
+
+resources: {}
+
+logLevel: info
+
+nodeSelector: {}
