@@ -1,18 +1,19 @@
 {{ $fullName := include "cockroachdb-operator.fullname" . }}
+{{ $labels := include "cockroachdb-operator.labels" . }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $fullName }}
   labels:
-    {{ include "cockroachdb-operator.labels" . | nindent 4 }}
+    {{ $labels | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{ include "cockroachdb-operator.labels" . | nindent 6 }}
+      {{ $labels | nindent 6 }}
   template:
     metadata:
       labels:
-        {{ include "cockroachdb-operator.labels" . | nindent 8 }}
+        {{ $labels | nindent 8 }}
     spec:
       serviceAccountName: cockroach-operator-sa
       containers:

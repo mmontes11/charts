@@ -1,0 +1,31 @@
+{{ $fullName := include "bankroach.fullname" . }}
+apiVersion: crdb.cockroachlabs.com/v1alpha1
+kind: CrdbCluster
+metadata:
+  name: {{ $fullName }}-cockroachdb
+  labels:
+    {{ include "bankroach.labels" . | nindent 4 }}
+spec:
+  {{ with .Values.cockroachdb.image }}
+  image:
+    name: "{{ .repository | default "cockroachdb/cockroach" }}:{{ .tag | default "v21.1.7" }}"
+  {{ end }}
+  dataStore:
+    pvc:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.cockroachdb.storage }}
+        volumeMode: Filesystem
+  {{ with .Values.cockroachdb.resources }}
+  resources:
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
+  tlsEnabled: {{ .Values.cockroachdb.tlsEnabled }}
+  nodes: {{ .Values.cockroachdb.nodes }}
+  {{ with .Values.cockroachdb.additionalLabels}}
+  additionalLabels:
+    {{ toYaml . | nindent 4 }}
+  {{ end}}

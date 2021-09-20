@@ -1,0 +1,38 @@
+replicaCount: 3
+
+image:
+  repository: mmontes11/bankroach
+  pullPolicy: IfNotPresent
+  tag: "v0.0.1"
+
+nameOverride: bankroach
+fullnameOverride: bankroach
+
+numAccounts: 5
+initialBalance: 1000
+scheduleIntervalSeconds: 5
+numWorkers: 10
+
+env: local
+logLevel: info
+
+cockroachdb:
+  image:
+    repository: cockroachdb/cockroach
+    tag: v21.1.7
+    pullPolicy: IfNotPresent
+  storage: "5Gi"
+  nodes: 3
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  tlsEnabled: true
+  additionalLabels: {}
+
+resources: {}
+
+nodeSelector: {}

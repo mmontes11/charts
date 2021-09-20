@@ -1,0 +1,67 @@
+{{ $fullName := include "bankroach.fullname" . }}
+{{ $selectorLabels := include "bankroach.selectorLabels" . }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ include "bankroach.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{ $selectorLabels | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{ $selectorLabels | nindent 8 }}
+    spec:
+      initContainers:
+        - name: wait-for-cockroachdb
+          image: postgres:9.6.5
+          command:
+            - 'sh'
+            - '-c'
+            - 'until pg_isready -h {{ $fullName }}-cockroachdb -p 26257; 
+            do echo waiting for cockroachdb; sleep 2; done;'
+      containers:
+        - name: {{ $fullName }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ with .Values.cockroachdb.tlsEnabled }}
+          volumeMounts:
+          - name: certs
+            mountPath: /certs
+          {{ end }}
+          envFrom:
+            - configMapRef:
+                name: {{ $fullName }}
+            - secretRef:
+                name: {{ $fullName }}
+          {{ with .Values.resources }}
+          resources:
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
+      {{ with .Values.cockroachdb.tlsEnabled }}
+      volumes:
+      - name: certs
+        projected:
+          sources:
+            - secret:
+                name: {{ $fullName }}-cockroachdb-node
+                items:
+                  - key: ca.crt
+                    path: ca.crt
+            - secret:
+                name: {{ $fullName }}-cockroachdb-root
+                items:
+                  - key: tls.crt
+                    path: client.root.crt
+                  - key: tls.key
+                    path: client.root.key
+          defaultMode: 256
+      {{ end }}
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}

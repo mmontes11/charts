@@ -1,0 +1,47 @@
+{{ if .Values.cockroachdb.tlsEnabled }}
+{{ $fullName := include "bankroach.fullname" . }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ $fullName }}-secure-sql-client
+  labels:
+    {{ include "bankroach.labels" . | nindent 4 }}
+spec:
+  initContainers:
+    - name: wait-for-cockroachdb
+      image: postgres:9.6.5
+      command:
+        - 'sh'
+        - '-c'
+        - 'until pg_isready -h {{ $fullName }}-cockroachdb -p 26257; 
+        do echo waiting for cockroachdb; sleep 2; done;'
+  containers:
+    - name: {{ $fullName }}
+      image: "{{ .Values.cockroachdb.image.repository | default "cockroachdb/cockroach"  }}:{{ .Values.cockroachdb.image.tag | default "v21.1.7"  }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+      volumeMounts:
+      - name: certs
+        mountPath: /certs
+      command:
+        - 'sh'
+        - '-c'
+        - 'while true; do sleep 30; done;'
+  terminationGracePeriodSeconds: 0
+  volumes:
+  - name: certs
+    projected:
+      sources:
+        - secret:
+            name: {{ $fullName }}-cockroachdb-node
+            items:
+              - key: ca.crt
+                path: ca.crt
+        - secret:
+            name: {{ $fullName }}-cockroachdb-root
+            items:
+              - key: tls.crt
+                path: client.root.crt
+              - key: tls.key
+                path: client.root.key
+      defaultMode: 256
+{{ end }}
