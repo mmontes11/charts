@@ -27,4 +27,5 @@ ExecStart=/usr/local/bin/k3s \
     server \
     --kubelet-arg containerd=/run/k3s/containerd/containerd.sock \
     --kube-apiserver-arg service-node-port-range=53-32767 \
+    --no-deploy traefik \
     --resolv-conf=/etc/resolv.conf
