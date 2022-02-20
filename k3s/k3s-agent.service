@@ -25,4 +25,5 @@ ExecStartPre=-/sbin/modprobe br_netfilter
 ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     agent \
-    --kubelet-arg containerd=/run/k3s/containerd/containerd.sock
+    --kubelet-arg containerd=/run/k3s/containerd/containerd.sock \
+    --resolv-conf=/etc/resolv.conf
