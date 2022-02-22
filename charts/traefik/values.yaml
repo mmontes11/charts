@@ -76,12 +76,12 @@ traefik:
     initContainers:
       # The "volume-permissions" init container is required if you run into permission issues.
       # Related issue: https://github.com/traefik/traefik/issues/6972
-      - name: volume-permissions
-        image: busybox:1.31.1
-        command: ["sh", "-c", "chmod -Rv 777 /data"]
-        volumeMounts:
-          - name: data
-            mountPath: /data
+      # - name: volume-permissions
+      #   image: busybox:1.31.1
+      #   command: ["sh", "-c", "touch /data/acme.json && chmod -Rv 600 /data/*"]
+      #   volumeMounts:
+      #     - name: data
+      #       mountPath: /data
     # Custom pod DNS policy. Apply if `hostNetwork: true`
     # dnsPolicy: ClusterFirstWithHostNet
     # Additional imagePullSecrets
@@ -455,12 +455,12 @@ traefik:
   # Set the container security context
   # To run the container with ports below 1024 this will need to be adjust to run as root
   securityContext:
-    capabilities:
-      drop: [ALL]
-    readOnlyRootFilesystem: true
-    runAsGroup: 65532
-    runAsNonRoot: true
-    runAsUser: 65532
+    # capabilities:
+    #   drop: [ALL]
+    readOnlyRootFilesystem: false
+    runAsGroup: 0
+    runAsNonRoot: false
+    runAsUser: 0
 
-  podSecurityContext:
-    fsGroup: 65532
+  # podSecurityContext:
+  #   fsGroup: 65532
