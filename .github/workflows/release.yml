@@ -18,8 +18,11 @@ jobs:
           version: "v3.5.3"
         id: install
 
+      - name: Install helm cm-push
+        run: helm plugin install https://github.com/chartmuseum/helm-push.git --version=v0.10.2
+
       - name: Release
         env:
           HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
           HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
-        run: ./scripts/release.sh
+        run: make releases
