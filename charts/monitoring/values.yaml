@@ -1004,8 +1004,8 @@ kube-prometheus-stack:
     service:
       port: 9153
       targetPort: 9153
-      # selector:
-      #   k8s-app: kube-dns
+      selector:
+        k8s-app: kube-dns
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
