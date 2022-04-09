@@ -4,7 +4,9 @@ set -e
 
 # TODO: update default when deploying to production
 HELM_REPO_URL="${HELM_REPO_URL:-https://charts.mmontes-dev-v2.duckdns.org}"
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )"
+CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
+
+echo "☸️  Starting helm chart release for '$HELM_REPO_URL' repository"
 
 echo "☸️  Updating repos..."
 helm repo add mmontes $HELM_REPO_URL
