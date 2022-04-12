@@ -16,7 +16,6 @@ jobs:
       - uses: azure/setup-helm@v1
         with:
           version: "v3.5.3"
-        id: install
 
       - name: Install helm cm-push
         run: helm plugin install https://github.com/chartmuseum/helm-push.git --version=v0.10.2
