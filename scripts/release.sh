@@ -2,7 +2,7 @@
 
 set -e
 
-# TODO: update default when deploying to production
+# TODO: update after migrating to v2
 HELM_REPO_URL="${HELM_REPO_URL:-https://charts.mmontes-dev-v2.duckdns.org}"
 CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
 

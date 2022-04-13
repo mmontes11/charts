@@ -1,16 +1,18 @@
 nameOverride: ""
 fullnameOverride: ""
 
-secretNameOverride: ""
-
 image:
   repository: linuxserver/duckdns
   pullPolicy: IfNotPresent
-  tag: latest
+  tag: 73eeb4c2-ls96
 
-subdomains: mmontes-dev,gotway
+subdomains:
+  - example.domain.org
 
 timezone: Europe/Madrid
+
+secretRef:
+  name: duckdns
 
 resources: {}
 

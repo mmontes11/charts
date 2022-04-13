@@ -8,5 +8,5 @@ data:
   LOG_FILE: "true"
   PGID: "1000"
   PUID: "1000"
-  SUBDOMAINS: {{ .Values.subdomains }}
+  SUBDOMAINS: {{ join "," .Values.subdomains }}
   TZ: {{ .Values.timezone }}

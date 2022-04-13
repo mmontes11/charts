@@ -49,10 +49,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "duckdns.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Secret
-*/}}
-{{- define "iot.secret" -}}
-{{- default .Chart.Name .Values.secretNameOverride  | trunc 63 | trimSuffix "-" }}
-{{- end }}

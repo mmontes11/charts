@@ -26,8 +26,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ $fullName }}
+            {{ with .Values.secretRef }}
             - secretRef:
-                name: {{ $fullName }}
+                {{ toYaml . | nindent 16 }}
+            {{ end }}
       {{ with .nodeSelector }}
       nodeSelector:
         {{ toYaml . | nindent 8 }}
