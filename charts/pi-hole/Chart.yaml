@@ -1,3 +1,4 @@
+# DEPRECATED: migrated to https://github.com/MoJo2600/pihole-kubernetes
 apiVersion: v2
 name: pi-hole
 description: Pi-hole by mmontes11
