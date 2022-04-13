@@ -31,13 +31,6 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Secret
-*/}}
-{{- define "mariadb.secret" -}}
-{{- default .Chart.Name .Values.secretNameOverride  | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{/*
 Common labels
 */}}
 {{- define "mariadb.labels" -}}

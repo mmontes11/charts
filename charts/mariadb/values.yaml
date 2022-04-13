@@ -1,16 +1,20 @@
 nameOverride: ""
 fullnameOverride: ""
 
-secretNameOverride: ""
-
 image:
   repository: mariadb
-  tag: "10.6.0"
+  tag: "10.7.3"
   pullPolicy: IfNotPresent
 
-storage: 4Gi
+storage:
+  size: 4Gi
+  className: standard
+  accessModes:
+    - "ReadWriteOnce"
 
-port: 3306
+# Check the docs to configure auth: https://hub.docker.com/_/mariadb
+secretRef:
+  name: mariadb
 
 resources: {}
 

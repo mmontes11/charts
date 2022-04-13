@@ -1,4 +1,5 @@
 {{ $fullName := include "mariadb.fullname" . }}
+{{ $selectorLabels := include "mariadb.selectorLabels" . }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -8,33 +9,44 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{ include "mariadb.selectorLabels" . | nindent 6 }}
+      {{ $selectorLabels | nindent 6 }}
   serviceName: {{ $fullName  }}
-  replicas: 1
   template:
     metadata:
       labels:
-        {{ include "mariadb.selectorLabels" . | nindent 8 }}
+        {{ $selectorLabels | nindent 8 }}
     spec:
       {{ with .Values.nodeSelector }}
       nodeSelector:
         {{ toYaml . | nindent 8 }}
       {{ end }}
       containers:
-      - name: mariadb
+      - name: {{ $fullName  }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{ with .Values.secretRef }}
         envFrom:
         - secretRef:
-            name: {{ include "mariadb.secret" . }}
+            {{ toYaml . | nindent 12 }}
+        {{ end }}
+        {{ with .resources }}
         resources:
-          {{ toYaml .Values.resources | nindent 12 }}
+          {{ toYaml . | nindent 12 }}
+        {{ end }}
         ports:
-        - containerPort: {{ .Values.port }}
+        - containerPort: 3306
+          name: mariadb
+  {{ with .Values.storage }}
         volumeMounts:
-        - name: {{ $fullName }}
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: {{ $fullName }}
-        persistentVolumeClaim:
-          claimName: {{ $fullName  }}
+          - name: storage
+            mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec:
+      accessModes: {{ .accessModes }}
+      storageClassName: {{ .className }}
+      resources:
+        requests:
+          storage: {{ .size }}
+  {{ end }}
