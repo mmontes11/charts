@@ -11,12 +11,16 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      backoffLimit: 5
+      parallelism: 1
+      completions: 1
       template:
         spec:
           {{ with .Values.nodeSelector }}
           nodeSelector:
             {{ toYaml . | nindent 16 }}
           {{ end }}
+          restartPolicy: OnFailure
           containers:
           - name: {{ $fullName }}-backup
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -25,15 +29,14 @@ spec:
               - mongodump
             args:
               - "--uri"
-              - "mongodb://{{ $fullName }}:{{ .Values.port }}"
+              - "mongodb://{{ $fullName }}:27017"
               - "--out"
               - "/backup"
             volumeMounts:
-            - name: {{ $fullName  }}-backup
+            - name: backup
               mountPath: /backup
-          restartPolicy: OnFailure
           volumes:
-          - name: {{ $fullName  }}-backup
+          - name: backup
             persistentVolumeClaim:
               claimName: {{ $fullName }}-backup
 {{ end }}

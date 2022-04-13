@@ -1,19 +1,7 @@
 {{ $fullName := include "mongodb.fullname" . }}
 {{ $labels := include "mongodb.labels" . }}
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $fullName }}
-  labels:
-    {{ $labels | nindent 4 }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ .Values.storage }}
----
 {{ if .Values.backup.enabled }}
+{{ with .Values.backup.storage }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -21,12 +9,10 @@ metadata:
   labels:
     {{ $labels | nindent 4 }}
 spec:
-  {{ with .Values.backup.storage }}
-  storageClassName: {{ .class }}
-  accessModes:
-    - ReadWriteOnce
+  storageClassName: {{ .className }}
+  accessModes: {{ .accessModes }}
   resources:
     requests:
       storage: {{ .size }}
-  {{ end }}
+{{ end }}
 {{ end }}

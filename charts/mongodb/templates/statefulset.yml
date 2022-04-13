@@ -34,7 +34,8 @@ spec:
             {{ toYaml . | nindent 12 }}
           {{ end }}
           ports:
-            - containerPort: {{ .Values.port }}
+            - containerPort: 27017
+              name: mongo
           livenessProbe:
             exec:
               command:
@@ -54,18 +55,28 @@ spec:
             {{ toYaml . | nindent 12 }}
             {{ end }}
           volumeMounts:
-            - name: {{ $fullName  }}
+            {{ if .Values.storage}}
+            - name: storage
               mountPath: /data/db
+            {{ end }} 
             {{ if .Values.backup.enabled }}
-            - name: {{ $fullName  }}-backup
+            - name: backup
               mountPath: /backup
-            {{ end }}
+            {{ end }} 
+      {{ if .Values.backup.enabled }}
       volumes:
-        - name: {{ $fullName  }}
-          persistentVolumeClaim:
-            claimName: {{ $fullName  }}
-        {{ if .Values.backup.enabled }}
-        - name: {{ $fullName  }}-backup
-          persistentVolumeClaim:
-            claimName: {{ $fullName }}-backup
-        {{ end }}
+      - name: backup
+        persistentVolumeClaim:
+          claimName: {{ $fullName }}-backup
+      {{ end }} 
+  {{ with .Values.storage }}
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec:
+      accessModes: {{ .accessModes }}
+      storageClassName: {{ .className }}
+      resources:
+        requests:
+          storage: {{ .size }}
+  {{ end }}

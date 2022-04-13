@@ -4,11 +4,22 @@ fullnameOverride: ""
 image:
   repository: mongo
   pullPolicy: IfNotPresent
-  tag: 4.4.4
+  tag: 4.4.13
 
-storage: 8Gi
+storage:
+  size: 8Gi
+  className: standard
+  accessModes:
+    - "ReadWriteOnce"
 
-port: 27017
+backup:
+  enabled: true
+  cron: "0 3 * * *"
+  storage:
+    size: 8Gi
+    className: standard
+    accessModes:
+      - "ReadWriteOnce"
 
 livenessProbe:
   initialDelaySeconds: 10
@@ -18,17 +29,9 @@ readinessProbe:
   initialDelaySeconds: 10
   periodSeconds: 10
 
-backup:
-  enabled: true
-  storage: 
-    size: 8Gi
-    class: nfs
-  cron:  "0 3 * * *"
-
 resources: {}
 
-nodeSelector:
-  kubernetes.io/arch: arm64
+nodeSelector: {}
 
 prometheus-mongodb-exporter:
   image:
@@ -44,22 +47,11 @@ prometheus-mongodb-exporter:
   service:
     port: 9113
     type: ClusterIP
-  livenessProbe:
-    httpGet:
-      path: /
-      port: metrics
-    initialDelaySeconds: 10
-  readinessProbe:
-    httpGet:
-      path: /
-      port: metrics
-    initialDelaySeconds: 10
   mongodb:
-    uri: "mongodb://mongo:27017"
+    uri: "mongodb://mongodb:27017"
   serviceMonitor:
     enabled: true
     interval: 30s
     scrapeTimeout: 10s
-    namespace: monitoring
     additionalLabels:
-      release: prometheus
+      release: kube-prometheus-stack

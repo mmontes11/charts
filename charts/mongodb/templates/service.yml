@@ -8,4 +8,5 @@ spec:
   selector:
     {{ include "mongodb.selectorLabels" . | nindent 4 }}
   ports:
-    - port: {{ .Values.port }}
+    - port: 27017
+      name: mongo
