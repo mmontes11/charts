@@ -8,4 +8,5 @@ spec:
   selector:
     {{ include "redis.selectorLabels" . | nindent 4 }}
   ports:
-    - port: {{ .Values.port }}
+    - port: 6379
+      name: redis

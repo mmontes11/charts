@@ -29,11 +29,19 @@ spec:
             {{ toYaml . | nindent 12 }}
           {{ end }}
           ports:
-            - containerPort: {{ .Values.port }}
+            - containerPort: 6379
+              name: redis
+  {{ with .Values.storage }}
           volumeMounts:
-            - name: {{ $fullName  }}
+            - name: storage
               mountPath: /data
-      volumes:
-        - name: {{ $fullName  }}
-          persistentVolumeClaim:
-            claimName: {{ $fullName  }}
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec:
+      accessModes: {{ .accessModes }}
+      storageClassName: {{ .className }}
+      resources:
+        requests:
+          storage: {{ .size }}
+  {{ end }}

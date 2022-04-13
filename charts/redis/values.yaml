@@ -4,11 +4,13 @@ fullnameOverride: ""
 image:
   repository: redis
   pullPolicy: IfNotPresent
-  tag: 6.2.1
+  tag: 6.2.6-alpine3.15
 
-storage: 1Gi
-
-port: 6379
+storage:
+  size: 1Gi
+  className: standard
+  accessModes:
+    - "ReadWriteOnce"
 
 resources: {}
 
@@ -16,8 +18,8 @@ nodeSelector: {}
 
 prometheus-redis-exporter:
   image:
-    repository: mmontes11/redis-prometheus-exporter
-    tag: v1.7.0
+    repository: oliver006/redis_exporter
+    tag: v1.37.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -25,8 +27,7 @@ prometheus-redis-exporter:
   redisAddress: redis://redis:6379
   serviceMonitor:
     enabled: true
-    namespace: monitoring
     interval: 30s
     timeout: 10s
     labels:
-      release: prometheus
+      release: kube-prometheus-stack
