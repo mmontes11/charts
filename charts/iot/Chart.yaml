@@ -21,12 +21,3 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 3.5.1
-
-
-dependencies:
-  - name: mongodb
-    version: "0.1.0"
-    repository: file://../mongodb
-  - name: redis
-    version: "0.1.0"
-    repository: file://../redis

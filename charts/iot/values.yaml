@@ -194,7 +194,7 @@ nginx:
   service:
     type: ClusterIP
     port: 80
-    
+
   resources:
     requests:
       cpu: 100m
@@ -210,26 +210,3 @@ nginx:
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
   nodeSelector: {}
-
-# dependencies
-
-mongodb:
-  backup:
-    enabled: true
-    storage: 
-      size: 8Gi
-      class: nfs
-    cron:  "0 3 * * *"
-  prometheus-mongodb-exporter:
-    mongodb:
-      uri: "mongodb://iot-mongodb:27017"
-    serviceMonitor:
-      additionalLabels:
-        release: monitoring
-
-redis:
-  prometheus-redis-exporter:
-    redisAddress: redis://iot-redis:6379
-    serviceMonitor:
-      labels:
-        release: monitoring
