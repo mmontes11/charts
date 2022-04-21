@@ -6,7 +6,7 @@ metadata:
   labels:
     {{ include "photoprism.labels" . | nindent 4 }}
 data:
-{{- range $key, $value := .Values.config }}
+{{- range $key, $value := .Values.env }}
   {{ $key }}: {{ $value | quote }}
 {{- end }}
 ---

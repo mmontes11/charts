@@ -1,5 +1,7 @@
 {{ $secret := include "photoprism.secret" . }}
 {{ $fullName := include "photoprism.fullname" . }}
+{{ $volumes := include "photoprism.volumes" . }}
+{{ $volumeMounts := include "photoprism.volumeMounts" . }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,41 +27,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
-        - configMapRef:
-            name: {{ $fullName }}-environment
-        - configMapRef:
-            name: {{ $fullName }}-storage
-        env:
-          - name: PHOTOPRISM_ADMIN_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ $secret }}
-                key: ADMIN_PASSWORD
-        {{ with .Values.database }}
-        {{ if eq .driver "mysql" }}
-          - name: PHOTOPRISM_DATABASE_NAME
-            valueFrom:
-              secretKeyRef:
-                name: {{ $secret }}
-                key: MYSQL_DATABASE
-          - name: PHOTOPRISM_DATABASE_USER
-            valueFrom:
-              secretKeyRef:
-                name: {{ $secret }}
-                key: MYSQL_USER
-          - name: PHOTOPRISM_DATABASE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ $secret }}
-                key: MYSQL_PASSWORD
-        {{ else if eq .driver "sqlite" }}
-          - name: PHOTOPRISM_DATABASE_DSN
-            valueFrom:
-              secretKeyRef:
-                name: {{ $secret }}
-                key: DATABASE_DSN
-        {{ end }}
-        {{ end }}
+          {{ include "photoprism.envFrom" . | nindent 10 }}
         livenessProbe:
           httpGet:
             path: /
@@ -73,17 +41,11 @@ spec:
         ports:
         - containerPort: 2342
           name: http
+        {{ if $volumeMounts}}
         volumeMounts:
-          {{ toYaml .Values.persistence.volumeMounts | nindent 8 }}
-    {{ if and .Values.persistence.enabled .Values.persistence.volumes }}
+          {{ $volumeMounts | nindent 10 }}
+        {{ end }}
+      {{ with $volumes }}
       volumes:
-      {{ toYaml .Values.persistence.volumes | nindent 6 }}
-    {{ else if eq .Values.persistence.enabled false }}
-      volumes:
-      - name: originals
-        emptyDir: {}
-      - name: import
-        emptyDir: {}
-      - name: storage
-        emptyDir: {}
-    {{ end }}
+        {{ $volumes | nindent 8 }}
+      {{ end }}

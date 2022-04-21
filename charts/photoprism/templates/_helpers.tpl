@@ -56,3 +56,44 @@ Selector labels
 app.kubernetes.io/name: {{ include "photoprism.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Env from
+*/}}
+{{- define "photoprism.envFrom" -}}
+{{ $fullName := include "photoprism.fullname" . }}
+- configMapRef:
+    name: {{ $fullName }}-environment
+- configMapRef:
+    name: {{ $fullName }}-storage
+{{ with .Values.secretRef }}
+- secretRef:
+    {{ toYaml . }}
+{{ end }}
+{{- end }}
+
+{{/*
+Volumes
+*/}}
+{{- define "photoprism.volumes" -}}
+{{ if and .Values.persistence.enabled .Values.persistence.volumes }}
+{{ toYaml .Values.persistence.volumes }}
+{{ else if eq .Values.persistence.enabled false }}
+- name: originals
+  emptyDir: {}
+- name: import
+  emptyDir: {}
+- name: storage
+  emptyDir: {}
+{{ end }}
+{{- end }}
+
+{{/*
+Volume mounts
+*/}}
+{{- define "photoprism.volumeMounts" -}}
+{{ if and .Values.persistence.enabled .Values.persistence.volumes }}
+{{ toYaml .Values.persistence.volumeMounts }}
+{{ end }}
+{{- end }}
+

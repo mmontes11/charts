@@ -1,14 +1,12 @@
 nameOverride: ""
 fullnameOverride: ""
 
-secretNameOverride: ""
-
 image:
   repository: mmontes11/photoprism-auto-index
-  tag: "v0.0.6"
+  tag: "220302-arm64"
   pullPolicy: IfNotPresent
 
-config:
+env:
   PHOTOPRISM_DEBUG: true
   PHOTOPRISM_PUBLIC: false
   PHOTOPRISM_READONLY: false
@@ -17,7 +15,9 @@ config:
   PHOTOPRISM_SITE_CAPTION: "Your media center"
   PHOTOPRISM_SITE_AUTHOR: "mmontes"
   PHOTOPRISM_WORKERS: 2
-  PHOTOPRISM_AUTO_INDEX_CRON: "0 6 * * *"
+
+secretRef:
+  name: photoprism
 
 persistence:
   enabled: true
@@ -25,33 +25,46 @@ persistence:
   nas: &nas my.nas.hostname
   originalsPath: &originalsPath /photoprism/originals
   importPath: &importPath /photoprism/import
-  storagePath:   &storagePath    /photoprism/storage
+  storagePath: &storagePath /photoprism/storage
 
   volumes:
-  - name: originals
-    nfs:
-      server: *nas
-      path: /photoprism/originals
-  - name: import
-    nfs:
-      server: *nas
-      path: /photoprism/import
-  - name: storage
-    nfs:
-      server: *nas
-      path: /photoprism/storage
-      
+    - name: originals
+      nfs:
+        server: *nas
+        path: /photoprism/originals
+    - name: import
+      nfs:
+        server: *nas
+        path: /photoprism/import
+    - name: storage
+      nfs:
+        server: *nas
+        path: /photoprism/storage
+
   volumeMounts:
-  - name: originals
-    mountPath: *originalsPath
-  - name: import
-    mountPath: *importPath
-  - name: storage
-    mountPath: *storagePath
+    - name: originals
+      mountPath: *originalsPath
+    - name: import
+      mountPath: *importPath
+    - name: storage
+      mountPath: *storagePath
 
 database:
   driver: mysql
   host: photoprism-mariadb
+
+sync:
+  enabled: true
+  cron: "0 6 * * *"
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 4Gi
+      cpu: 2
+  nodeSelector:
+    kubernetes.io/arch: arm64
 
 service:
   type: ClusterIP
@@ -65,18 +78,11 @@ ingressRoute:
 
 resources:
   requests:
-    memory: 512Mi
-    cpu: 250m
+    memory: 64Mi
+    cpu: 50m
   limits:
-    memory: 4Gi
-    cpu: 2
-
-replicaCount: 1
+    memory: 256Mi
+    cpu: 200m
 
 nodeSelector:
   kubernetes.io/arch: arm64
-
-mariadb:
-  secretNameOverride: photoprism
-  nodeSelector:
-    kubernetes.io/arch: arm64
