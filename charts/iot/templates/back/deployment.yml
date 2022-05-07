@@ -15,7 +15,6 @@ spec:
   selector:
     matchLabels:
       {{ $selectorLabels | nindent 6 }}
-  replicas: 1
   template:
     metadata:
       labels:
