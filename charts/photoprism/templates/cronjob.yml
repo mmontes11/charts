@@ -1,0 +1,47 @@
+{{ if .Values.sync.enabled }}
+{{ $volumes := include "photoprism.volumes" . }}
+{{ $volumeMounts := include "photoprism.volumeMounts" . }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "photoprism.fullname" . }}-sync
+  labels:
+    {{ include "photoprism.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.sync.cron | quote }}
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      parallelism: 1
+      completions: 1
+      template:
+        spec:
+          {{ with .Values.sync.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
+          restartPolicy: OnFailure
+          containers:
+          - name: photoprism
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command:
+            - photoprism
+            args:
+            - index
+            envFrom:
+              {{ include "photoprism.envFrom" . | nindent 14 }}
+            {{ with .Values.sync.resources }}
+            resources:
+              {{ toYaml . | nindent 14 }}
+            {{ end }}
+            {{ if $volumeMounts}}
+            volumeMounts:
+              {{ $volumeMounts | nindent 14 }}
+            {{ end }}
+          {{ with $volumes }}
+          volumes:
+            {{ $volumes | nindent 12 }}
+          {{ end }}
+{{ end }}

@@ -2,19 +2,18 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: mmontes11/photoprism-auto-index
-  tag: "220302-arm64"
+  repository: photoprism/photoprism
+  tag: "220302-bullseye"
   pullPolicy: IfNotPresent
 
 env:
-  PHOTOPRISM_DEBUG: true
-  PHOTOPRISM_PUBLIC: false
-  PHOTOPRISM_READONLY: false
+  PHOTOPRISM_AUTH: true
   PHOTOPRISM_HTTP_COMPRESSION: "gzip"
-  PHOTOPRISM_SITE_TITLE: "Media"
+  PHOTOPRISM_LOG_LEVEL: info
+  PHOTOPRISM_READONLY: true
+  PHOTOPRISM_SITE_AUTHOR: "You"
   PHOTOPRISM_SITE_CAPTION: "Your media center"
-  PHOTOPRISM_SITE_AUTHOR: "mmontes"
-  PHOTOPRISM_WORKERS: 2
+  PHOTOPRISM_SITE_DESCRIPTION: "Your media center"
 
 secretRef:
   name: photoprism
@@ -51,20 +50,19 @@ persistence:
 
 database:
   driver: mysql
-  host: photoprism-mariadb
+  host: mariadb:3306
 
 sync:
   enabled: true
-  cron: "0 6 * * *"
+  cron: "0 3,15 * * *"
   resources:
     requests:
       memory: 512Mi
-      cpu: 250m
+      cpu: 500m
     limits:
       memory: 4Gi
       cpu: 2
-  nodeSelector:
-    kubernetes.io/arch: arm64
+  nodeSelector: {}
 
 service:
   type: ClusterIP
@@ -72,17 +70,16 @@ service:
 
 ingressRoute:
   enabled: true
-  host: photoprism.example.org
+  host: photoprism.org
   entryPoints:
     - websecure
 
 resources:
   requests:
-    memory: 64Mi
-    cpu: 50m
+    memory: 128Mi
+    cpu: 250m
   limits:
-    memory: 256Mi
-    cpu: 200m
+    memory: 512Mi
+    cpu: 1
 
-nodeSelector:
-  kubernetes.io/arch: arm64
+nodeSelector: {}

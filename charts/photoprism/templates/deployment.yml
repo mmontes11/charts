@@ -1,5 +1,3 @@
-{{ $secret := include "photoprism.secret" . }}
-{{ $fullName := include "photoprism.fullname" . }}
 {{ $volumes := include "photoprism.volumes" . }}
 {{ $volumeMounts := include "photoprism.volumeMounts" . }}
 apiVersion: apps/v1

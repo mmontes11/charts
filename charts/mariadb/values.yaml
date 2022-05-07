@@ -8,7 +8,7 @@ image:
 
 storage:
   size: 4Gi
-  className: standard
+  className: local-path
   accessModes:
     - "ReadWriteOnce"
 
