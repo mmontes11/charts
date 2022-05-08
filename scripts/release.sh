@@ -19,9 +19,11 @@ helm repo add traefik https://helm.traefik.io/traefik
 helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
 helm repo update
 
+echo "☸️  Updating dependencies..."
+helm dep update "charts/crypto-trade"
+
 for path in $(ls -d $CURRENT_DIR/../charts/*); do
   name=$(basename "$path")
   echo "📦 Releasing '$name'..."
-  helm dep update "$path"
   helm cm-push "$path" mmontes
 done
