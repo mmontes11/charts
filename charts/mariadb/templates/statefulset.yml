@@ -29,7 +29,7 @@ spec:
         - secretRef:
             {{ toYaml . | nindent 12 }}
         {{ end }}
-        {{ with .resources }}
+        {{ with .Values.resources }}
         resources:
           {{ toYaml . | nindent 12 }}
         {{ end }}

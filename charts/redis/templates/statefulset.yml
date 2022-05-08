@@ -24,7 +24,7 @@ spec:
         - name: {{ $fullName  }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{ with .resources }}
+          {{ with .Values.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
           {{ end }}
