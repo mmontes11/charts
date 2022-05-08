@@ -1,6 +1,0 @@
-dependencies:
-- name: nfs-subdir-external-provisioner
-  repository: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-  version: 4.0.10
-digest: sha256:a36280f189977ede5dbd2312e74861c97a5ae29d37a7f6fa046dbcd2fd03fa96
-generated: "2021-05-16T11:13:28.633328+02:00"
