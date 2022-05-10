@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "duckdns.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*

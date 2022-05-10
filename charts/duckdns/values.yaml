@@ -14,6 +14,19 @@ timezone: Europe/Madrid
 secretRef:
   name: duckdns
 
+replicas: 2
+
 resources: {}
 
 nodeSelector: {}
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - duckdns
+        topologyKey: kubernetes.io/hostname

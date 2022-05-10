@@ -1,7 +1,7 @@
 {{ $fullName := include "duckdns.fullname" . }}
 {{ $selectorLabels := include "duckdns.selectorLabels" . }}
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: {{ $fullName }}
   labels:
@@ -10,11 +10,22 @@ spec:
   selector:
     matchLabels:
       {{ $selectorLabels | nindent 6 }}
+  {{ with .Values.replicas }}
+  replicas: {{ . }}
+  {{ end }}
   template:
     metadata:
       labels:
         {{ $selectorLabels | nindent 8 }}
     spec:
+      {{ with .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      {{ with .Values.affinity }}
+      affinity:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
       containers:
         - name: {{ $fullName }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -30,7 +41,3 @@ spec:
             - secretRef:
                 {{ toYaml . | nindent 16 }}
             {{ end }}
-      {{ with .Values.nodeSelector }}
-      nodeSelector:
-        {{ toYaml . | nindent 8 }}
-      {{ end}}
