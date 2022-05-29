@@ -21,6 +21,10 @@ spec:
           nodeSelector:
             {{ toYaml . | nindent 12 }}
           {{ end }}
+          {{ with .Values.sync.affinity }}
+          affinity:
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
           restartPolicy: OnFailure
           containers:
           - name: photoprism

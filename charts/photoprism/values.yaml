@@ -63,6 +63,7 @@ sync:
       memory: 4Gi
       cpu: 2
   nodeSelector: {}
+  affinity: {}
 
 service:
   type: ClusterIP
@@ -83,3 +84,5 @@ resources:
     cpu: 1
 
 nodeSelector: {}
+
+affinity: {}
