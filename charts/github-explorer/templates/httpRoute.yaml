@@ -1,0 +1,20 @@
+{{- if .Values.httpRoute.enabled -}}
+{{- $fullName := include "github-explorer.fullname" . -}}
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "github-explorer.labels" . | nindent 4 }}
+spec:
+  parentRefs:
+    - name: {{ .Values.httpRoute.gatewayRef.name }}
+      namespace: {{ .Values.httpRoute.gatewayRef.namespace }}
+  hostnames:
+    - {{ .Values.httpRoute.host }}
+  rules:
+    - backendRef:
+      - kind: Service
+        name: {{ $fullName }}
+        port: {{ .Values.service.port }}
+{{- end }}

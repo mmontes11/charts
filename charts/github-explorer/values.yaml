@@ -11,10 +11,17 @@ service:
   port: 80
 
 ingressRoute:
-  enabled: true
-  host: github-explorer.mmontes-dev.duckdns.org
+  enabled: false
+  host: github-explorer.mmontes.duckdns.org
   entryPoints:
     - websecure
+
+httpRoute:
+  enabled: false
+  host: github-explorer.mmontes.duckdns.org
+  gatewayRef:
+    name: traefik
+    namespace: networking
 
 resources: {}
 
