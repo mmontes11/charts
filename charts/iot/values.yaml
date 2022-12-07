@@ -187,9 +187,17 @@ nginx:
     tag: v3.5.1
 
   ingressRoute:
-    host: iot.mmontes-dev.duckdns.org
+    enabled: false
+    host: iot.mmontes.duckdns.org
     entryPoints:
       - websecure
+
+  httpRoute:
+    enabled: false
+    host: iot.mmontes.duckdns.org
+    gatewayRef:
+      name: traefik
+      namespace: networking
 
   service:
     type: ClusterIP

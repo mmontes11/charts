@@ -1,5 +1,7 @@
 {{ with $.Values.nginx }}
 {{ $fullName := include "iot.fullnameNginx" $ }}
+
+{{ if .ingressRoute.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -18,4 +20,26 @@ spec:
         - kind: Service
           name: {{ $fullName }}
           port: {{ .service.port }}
+{{ end }}
+
+{{ if .httpRoute.enabled }}
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ include "iot.labels" $ | nindent 4 }}
+spec:
+  parentRefs:
+    - name: {{ .httpRoute.gatewayRef.name }}
+      namespace: {{ .httpRoute.gatewayRef.namespace }}
+  hostnames:
+    - {{ .httpRoute.host }}
+  rules:
+    - backendRefs:
+      - kind: Service
+        name: {{ $fullName }}
+        port: {{ .service.port }}
+{{ end }}
+
 {{ end }}

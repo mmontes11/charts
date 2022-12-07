@@ -1,7 +1,7 @@
 {{ with $.Values.nginx }}
 {{ if .autoscaling.enabled }}
 {{ $fullName := include "iot.fullnameNginx" $ }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ $fullName  }}

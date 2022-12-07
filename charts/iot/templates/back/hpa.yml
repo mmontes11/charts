@@ -1,7 +1,7 @@
 {{ with $.Values.back }}
 {{ if .autoscaling.enabled }}
 {{ $fullName := include "iot.fullnameBack" $ }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ $fullName  }}
