@@ -13,7 +13,7 @@ spec:
   hostnames:
     - {{ .Values.httpRoute.host }}
   rules:
-    - backendRef:
+    - backendRefs:
       - kind: Service
         name: {{ $fullName }}
         port: {{ .Values.service.port }}
