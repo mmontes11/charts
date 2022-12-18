@@ -2,7 +2,7 @@
 
 set -e
 
-HELM_REPO_URL="${HELM_REPO_URL:-https://charts.mmontes-dev.duckdns.org}"
+HELM_REPO_URL="${HELM_REPO_URL:-https://charts.mmontes.duckdns.org}"
 CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 echo "☸️  Starting helm chart release for '$HELM_REPO_URL' repository"
