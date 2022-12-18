@@ -8,6 +8,6 @@ ARM-compatible helm charts by mmontes11.
 ### Usage
 
 ```bash
-$ helm repo add mmontes https://charts.mmontes-dev.duckdns.org
+$ helm repo add mmontes https://charts.mmontes.duckdns.org
 $ helm install iot mmontes/iot
 ```
