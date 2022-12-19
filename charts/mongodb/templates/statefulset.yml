@@ -63,12 +63,7 @@ spec:
             - name: backup
               mountPath: /backup
             {{ end }} 
-      {{ if .Values.backup.enabled }}
-      volumes:
-      - name: backup
-        persistentVolumeClaim:
-          claimName: {{ $fullName }}-backup
-      {{ end }} 
+      {{ include "mongodb.backupVolume" . | nindent 6 }}
   {{ with .Values.storage }}
   volumeClaimTemplates:
   - metadata:

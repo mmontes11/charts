@@ -35,17 +35,5 @@ spec:
             volumeMounts:
             - name: backup
               mountPath: /backup
-          volumes:
-          {{ if .Values.backup.volume.nfs }}
-          - name: backup
-            nfs:
-              server: {{ .Values.backup.volume.nfs.server }}
-              path: {{ .Values.backup.volume.nfs.path }}
-          {{ else }}
-          {{ if .Values.backup.volume.pvc }}
-          - name: backup
-            persistentVolumeClaim:
-              claimName: {{ $fullName }}-backup
-          {{ end }}
-          {{ end }}
+          {{ include "mongodb.backupVolume" . | nindent 10 }} 
 {{ end }}

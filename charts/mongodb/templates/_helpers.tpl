@@ -49,3 +49,25 @@ Selector labels
 app.kubernetes.io/name: {{ include "mongodb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+
+{{/*
+Volumes
+*/}}
+{{- define "mongodb.backupVolume" -}}
+{{- if .Values.backup.enabled }}
+volumes:
+{{- if .Values.backup.volume.nfs }}
+- name: backup
+  nfs:
+    server: {{ .Values.backup.volume.nfs.server }}
+    path: {{ .Values.backup.volume.nfs.path }}
+{{- else }}
+{{- if .Values.backup.volume.pvc }}
+- name: backup
+  persistentVolumeClaim:
+    claimName: {{ include "mongodb.fullname" . }}-backup
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
