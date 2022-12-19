@@ -57,13 +57,13 @@ Volumes
 {{- define "mongodb.backupVolume" -}}
 {{- if .Values.backup.enabled }}
 volumes:
-{{- if .Values.backup.volume.nfs }}
+{{- if .Values.backup.volume.nfs.enabled }}
 - name: backup
   nfs:
     server: {{ .Values.backup.volume.nfs.server }}
     path: {{ .Values.backup.volume.nfs.path }}
 {{- else }}
-{{- if .Values.backup.volume.pvc }}
+{{- if .Values.backup.volume.pvc.enabled }}
 - name: backup
   persistentVolumeClaim:
     claimName: {{ include "mongodb.fullname" . }}-backup

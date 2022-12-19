@@ -1,4 +1,4 @@
-{{ if .Values.backup.enabled }}
+{{ if and .Values.backup.enabled .Values.backup.volume.pvc.enabled }}
 {{ $fullName := include "mongodb.fullname" . }}
 {{ $labels := include "mongodb.labels" . }}
 {{ with .Values.backup.volume.pvc }}

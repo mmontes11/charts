@@ -17,9 +17,11 @@ backup:
   cron: "0 3 * * *"
   volume:
     nfs:
+      enabled: false
       server: my.nas.hostname
       path: /volume
     pvc:
+      enabled: true
       size: 8Gi
       className: standard
       accessModes:
