@@ -15,11 +15,15 @@ storage:
 backup:
   enabled: true
   cron: "0 3 * * *"
-  storage:
-    size: 8Gi
-    className: standard
-    accessModes:
-      - "ReadWriteOnce"
+  volume:
+    nfs:
+      server: my.nas.hostname
+      path: /volume
+    pvc:
+      size: 8Gi
+      className: standard
+      accessModes:
+        - "ReadWriteOnce"
 
 livenessProbe:
   initialDelaySeconds: 10

@@ -1,7 +1,7 @@
+{{ if .Values.backup.enabled }}
 {{ $fullName := include "mongodb.fullname" . }}
 {{ $labels := include "mongodb.labels" . }}
-{{ if .Values.backup.enabled }}
-{{ with .Values.backup.storage }}
+{{ with .Values.backup.volume.pvc }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
