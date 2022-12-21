@@ -24,7 +24,6 @@ data:
   {{ end }}
   {{ if $.Values.thing.enabled }}
   {{ with .thing }}
-  THING_SOCKET_PORT: {{ .port | quote }}
   THING_SOCKET_URL: {{ .url | quote }}
   {{ end }}
   {{ end }}
