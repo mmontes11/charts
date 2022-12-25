@@ -7,7 +7,6 @@ metadata:
     {{ include "iot.labels" $ | nindent 4 }}
 spec:
   type: {{ .service.type }}
-  sessionAffinity: ClientIP
   ports:
     - port: {{ .service.port }}
   selector: 
