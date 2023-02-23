@@ -61,14 +61,29 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Env from
 */}}
 {{- define "photoprism.envFrom" -}}
-{{ $fullName := include "photoprism.fullname" . }}
-- configMapRef:
-    name: {{ $fullName }}-environment
-- configMapRef:
-    name: {{ $fullName }}-storage
-{{ with .Values.secretRef }}
-- secretRef:
-    {{ toYaml . }}
+envFrom:
+  {{ $fullName := include "photoprism.fullname" . }}
+  - configMapRef:
+      name: {{ $fullName }}-environment
+  - configMapRef:
+      name: {{ $fullName }}-storage
+  {{ with .Values.secretRef }}
+  - secretRef:
+      {{ toYaml . }}
+  {{ end }}
+{{- end }}
+
+{{/*
+Env
+*/}}
+{{- define "photoprism.env" -}}
+{{ with .Values.database.dsnSecretKeyRef }}
+env:
+  - name: PHOTOPRISM_DATABASE_DSN
+    valueFrom:
+      secretKeyRef:
+        name: {{ .name }}
+        key: {{ .key }}
 {{ end }}
 {{- end }}
 

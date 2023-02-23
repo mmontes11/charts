@@ -50,7 +50,9 @@ persistence:
 
 database:
   driver: mysql
-  host: mariadb:3306
+  dsnSecretKeyRef:
+    name: photoprism-dsn
+    key: dsn
 
 sync:
   enabled: true
