@@ -1,0 +1,162 @@
+apiVersion: v1
+entries:
+  bankroach:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-02-23T18:08:17.059704126Z"
+    description: Simple CRUD application using CockroachDB and Go
+    digest: 3c03053a4f45d792d6361601c9fa91e2648cd5e45944b9682e8db4562e391e3e
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: bankroach
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/bankroach-0.1.0/bankroach-0.1.0.tgz
+    version: 0.1.0
+  cockroachdb-operator:
+  - apiVersion: v2
+    appVersion: 2.1.0
+    created: "2023-02-23T18:08:17.137247525Z"
+    description: CockroachDB operator
+    digest: 38193764b7c407ce174dd2e5862cf2481ab4df818124d149a04cce21c46fcaaa
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: cockroachdb-operator
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/cockroachdb-operator-0.1.0/cockroachdb-operator-0.1.0.tgz
+    version: 0.1.0
+  duckdns:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-02-23T18:08:17.2130984Z"
+    description: Duckdns domain auto renewal
+    digest: f1040e822e5e50722998c18bc655867f363f6aea2c9df59e98fbba98996a3e4b
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: duckdns
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/duckdns-0.3.0/duckdns-0.3.0.tgz
+    version: 0.3.0
+  echoperator:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-02-23T18:08:17.293282837Z"
+    description: Simple kubernetes operator for handling echo CRDs
+    digest: 6eb35b4b659b75a36ac2933319052c4f780a853a1120ed17e5d9a96bb54fb5a9
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: echoperator
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/echoperator-0.0.1/echoperator-0.0.1.tgz
+    version: 0.0.1
+  github-explorer:
+  - apiVersion: v2
+    appVersion: 0.5.0
+    created: "2023-02-23T18:08:17.385051237Z"
+    description: React UI for exploring GitHub using Apollo GraphQL
+    digest: 73864d4e131912a0730c485a6d2bd24a1814c28c223dc9b41b4f340e6d5aaf26
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: github-explorer
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/github-explorer-0.2.1/github-explorer-0.2.1.tgz
+    version: 0.2.1
+  iot:
+  - apiVersion: v2
+    appVersion: v3.8.0
+    created: "2023-02-23T18:08:17.511873334Z"
+    description: General purpose Internet of Things platform
+    digest: 281289eec56dee12ff124d43a32b2311ca67cd97f6210d907ff601b3ad45f0f9
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: iot
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/iot-0.3.1/iot-0.3.1.tgz
+    version: 0.3.1
+  mariadb:
+  - apiVersion: v2
+    appVersion: 3.1.0
+    created: "2023-02-23T18:08:17.783336182Z"
+    description: MariaDB database
+    digest: 6cdc4fd5186ad9aefff4979811e3bbebe4a4fe0d93d19c350384865c910016fb
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: mariadb
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/mariadb-0.2.0/mariadb-0.2.0.tgz
+    version: 0.2.0
+  mongodb:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-23T18:08:17.875795092Z"
+    description: MongoDB with metrics compatible with ARM
+    digest: 52d98f65c313efbe44ef553ee318865c31ae047a4143b0443aa33c27c98d9f2d
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: mongodb
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/mongodb-0.4.2/mongodb-0.4.2.tgz
+    version: 0.4.2
+  photoprism:
+  - apiVersion: v2
+    appVersion: 3.1.0
+    created: "2023-02-23T18:08:17.963681838Z"
+    description: Photoprism by mmontes11
+    digest: d147efe94395bf5f7dfa6ed81e29acaca757b2b1e4e80ab32a4d21fc702769b4
+    keywords:
+    - photoprism
+    - photos
+    - media
+    - google-photos
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: photoprism
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/photoprism-0.3.0/photoprism-0.3.0.tgz
+    version: 0.3.0
+  redis:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-23T18:08:18.062368336Z"
+    description: Redis with metrics compatible with ARM
+    digest: 2372639124df0df60755cbfafe911c3c9c8c0341493e913d6259d78f2c421945
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: redis
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/redis-0.3.0/redis-0.3.0.tgz
+    version: 0.3.0
+  tenant:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-23T18:08:18.133744148Z"
+    description: Helm chart for bootstrapping a tenant
+    digest: d4e246f615ec10df3f1b5ab726d6779b7371c19f8d6f7ef1fffd6641823d006c
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: tenant
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-23T18:08:18.133751448Z"
