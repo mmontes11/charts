@@ -1,0 +1,10 @@
+apiVersion: v2
+name: tenant
+description: Helm chart for bootstrapping a tenant
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+kubeVersion: ">= 1.16.0-0"
+maintainers:
+  - name: mmontes11
+    email: martin11lrx@gmail.com

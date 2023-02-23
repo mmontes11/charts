@@ -1,0 +1,10 @@
+apiVersion: v2
+name: echoperator
+description: Simple kubernetes operator for handling echo CRDs
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+kubeVersion: ">= 1.16.0-0"
+maintainers:
+  - name: mmontes11
+    email: martin11lrx@gmail.com
