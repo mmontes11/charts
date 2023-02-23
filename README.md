@@ -6,6 +6,6 @@
 ### Usage
 
 ```bash
-$ helm repo add mmontes https://mmontes11.github.io/charts
-$ helm install iot mmontes/iot
+helm repo add mmontes https://mmontes11.github.io/charts
+helm install iot mmontes/iot
 ```
