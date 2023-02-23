@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mariadb
+description: MariaDB database
+type: application
+version: 0.2.0
+appVersion: 3.1.0
+kubeVersion: ">= 1.16.0-0"
+maintainers:
+  - name: mmontes11
+    email: martin11lrx@gmail.com

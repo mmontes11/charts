@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mongodb
+description: MongoDB with metrics compatible with ARM
+type: application
+version: 0.4.2
+appVersion: 1.16.0
+kubeVersion: ">= 1.16.0-0"
+maintainers:
+  - name: mmontes11
+    email: martin11lrx@gmail.com
