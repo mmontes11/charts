@@ -34,8 +34,8 @@ spec:
             - photoprism
             args:
             - index
-            envFrom:
-              {{ include "photoprism.envFrom" . | nindent 14 }}
+            {{ include "photoprism.envFrom" . | nindent 12 }}
+            {{ include "photoprism.env" . | nindent 12 }}
             {{ with .Values.sync.resources }}
             resources:
               {{ toYaml . | nindent 14 }}

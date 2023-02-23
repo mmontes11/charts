@@ -20,9 +20,6 @@ data:
   PHOTOPRISM_HTTP_HOST: 0.0.0.0
   PHOTOPRISM_HTTP_PORT: "2342"
   PHOTOPRISM_DATABASE_DRIVER: {{ .Values.database.driver }}
-  {{ if eq .Values.database.driver "mysql" }}
-  PHOTOPRISM_DATABASE_SERVER: {{ .Values.database.host }}
-  {{ end }}
   {{- with .Values.persistence }}
   PHOTOPRISM_ORIGINALS_PATH: {{ .originalsPath }}
   PHOTOPRISM_IMPORT_PATH: {{ .importPath }}

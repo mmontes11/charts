@@ -28,8 +28,8 @@ spec:
       - name: photoprism
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        envFrom:
-          {{ include "photoprism.envFrom" . | nindent 10 }}
+        {{ include "photoprism.envFrom" . | nindent 8 }}
+        {{ include "photoprism.env" . | nindent 8 }}
         livenessProbe:
           httpGet:
             path: /
