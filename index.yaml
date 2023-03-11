@@ -87,6 +87,19 @@ entries:
   mariadb:
   - apiVersion: v2
     appVersion: 3.1.0
+    created: "2023-03-11T09:51:45.616832301Z"
+    description: MariaDB database
+    digest: 82c1a19185ea24de83494cc06a5682a368e2079422c07291a038267aaa64ddf6
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: mariadb
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/mariadb-0.3.0/mariadb-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 3.1.0
     created: "2023-02-23T18:08:17.783336182Z"
     description: MariaDB database
     digest: 6cdc4fd5186ad9aefff4979811e3bbebe4a4fe0d93d19c350384865c910016fb
@@ -101,6 +114,19 @@ entries:
   mongodb:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-11T09:51:45.766103268Z"
+    description: MongoDB with metrics compatible with ARM
+    digest: a662cdcef26b5a25846ecaa5899e5b4aeaf3fe117ad915bf385ed5976937d5d1
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: mongodb
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/mongodb-0.5.0/mongodb-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-23T18:08:17.875795092Z"
     description: MongoDB with metrics compatible with ARM
     digest: 52d98f65c313efbe44ef553ee318865c31ae047a4143b0443aa33c27c98d9f2d
@@ -113,6 +139,24 @@ entries:
     - https://github.com/mmontes11/charts/releases/download/mongodb-0.4.2/mongodb-0.4.2.tgz
     version: 0.4.2
   photoprism:
+  - apiVersion: v2
+    appVersion: 3.1.0
+    created: "2023-03-11T09:51:45.906366311Z"
+    description: Photoprism by mmontes11
+    digest: 35e73946327d4ef93e0ead7b07f9daad7aa2cf5a9a0c17d3c677b5050da007da
+    keywords:
+    - photoprism
+    - photos
+    - media
+    - google-photos
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: photoprism
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/photoprism-0.5.0/photoprism-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     appVersion: 3.1.0
     created: "2023-02-23T20:22:39.364139899Z"
@@ -152,6 +196,19 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-11T09:51:46.098942878Z"
+    description: Redis with metrics compatible with ARM
+    digest: 4d0ccb62f838175a4ebb4380c8534fa46ce0e45537469ad8dc82f417e31b8894
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: redis
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/redis-0.4.0/redis-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-23T18:08:18.062368336Z"
     description: Redis with metrics compatible with ARM
     digest: 2372639124df0df60755cbfafe911c3c9c8c0341493e913d6259d78f2c421945
@@ -177,4 +234,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-23T20:22:39.364214005Z"
+generated: "2023-03-11T09:51:46.09906348Z"
