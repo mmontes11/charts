@@ -38,3 +38,7 @@ readinessProbe:
 resources: {}
 
 nodeSelector: {}
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1

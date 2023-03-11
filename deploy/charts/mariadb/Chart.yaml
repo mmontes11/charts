@@ -2,7 +2,7 @@ apiVersion: v2
 name: mariadb
 description: MariaDB database
 type: application
-version: 0.2.0
+version: 0.3.0
 appVersion: 3.1.0
 maintainers:
   - name: mmontes11
