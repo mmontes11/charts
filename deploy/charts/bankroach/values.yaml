@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: mmontes11/bankroach
+  repository: ghcr.io/mmontes11/bankroach
   pullPolicy: IfNotPresent
-  tag: "v0.0.1"
+  tag: ""
 
 nameOverride: bankroach
 fullnameOverride: bankroach

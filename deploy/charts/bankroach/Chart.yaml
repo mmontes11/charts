@@ -2,8 +2,8 @@ apiVersion: v2
 name: bankroach
 description: Simple CRUD application using CockroachDB and Go
 type: application
-version: 0.1.0
-appVersion: "0.0.1"
+version: 0.1.1
+appVersion: "v0.0.2"
 maintainers:
   - name: mmontes11
     email: martin11lrx@gmail.com
