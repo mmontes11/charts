@@ -2,9 +2,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: mmontes11/github-explorer
+  repository: ghcr.io/mmontes11/github-explorer
   pullPolicy: IfNotPresent
-  tag: "0.5.0"
+  tag: ""
 
 service:
   type: ClusterIP
