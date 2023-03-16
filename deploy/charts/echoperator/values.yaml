@@ -2,9 +2,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: mmontes11/echoperator
+  repository: ghcr.io/mmontes11/echoperator
   pullPolicy: IfNotPresent
-  tag: v0.0.1
+  tag: ""
 
 env: production
 
