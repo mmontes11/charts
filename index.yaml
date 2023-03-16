@@ -44,6 +44,19 @@ entries:
     version: 0.3.0
   echoperator:
   - apiVersion: v2
+    appVersion: v0.0.4
+    created: "2023-03-16T18:07:42.114786688Z"
+    description: Simple kubernetes operator for handling echo CRDs
+    digest: 70c5f2b50b1c2ded02d182f2263c3bc336fec1274c58234aca909ea573f0224b
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: echoperator
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/echoperator-0.0.2/echoperator-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     appVersion: 0.0.1
     created: "2023-02-23T18:08:17.293282837Z"
     description: Simple kubernetes operator for handling echo CRDs
@@ -234,4 +247,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-11T09:51:46.09906348Z"
+generated: "2023-03-16T18:07:42.114943288Z"
