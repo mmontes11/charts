@@ -124,6 +124,19 @@ entries:
     version: 0.2.1
   iot:
   - apiVersion: v2
+    appVersion: v3.11.0
+    created: "2023-03-17T21:24:08.582468207Z"
+    description: General purpose Internet of Things platform
+    digest: ca9222298fca520002a2ca4979267353fd37de36c6ac0e7c795c3827aeb659b5
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: iot
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/iot-0.3.2/iot-0.3.2.tgz
+    version: 0.3.2
+  - apiVersion: v2
     appVersion: v3.8.0
     created: "2023-02-23T18:08:17.511873334Z"
     description: General purpose Internet of Things platform
@@ -286,4 +299,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-16T21:23:22.768002426Z"
+generated: "2023-03-17T21:24:08.582934916Z"
