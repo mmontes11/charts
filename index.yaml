@@ -27,6 +27,30 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/bankroach-0.1.0/bankroach-0.1.0.tgz
     version: 0.1.0
+  cert-manager-webhook-duckdns:
+  - apiVersion: v1
+    appVersion: v1.2.3
+    created: "2024-06-29T09:57:59.532413739Z"
+    description: A Helm chart for cert manager webhook solver for ACME DNS01 challenge
+      via DuckDNS
+    digest: e715ecb14cde8cad5b4e0d3493f4bf6c7b598db1406b9faee56d92d0dede0df1
+    home: https://github.com/ebrianne/cert-manager-webhook-duckdns
+    icon: https://raw.githubusercontent.com/jetstack/cert-manager/master/logo/logo.png
+    keywords:
+    - cert-manager
+    - webhook
+    - letsencrypt
+    - tls
+    maintainers:
+    - email: eldwan35@gmail.com
+      name: Eldwan Brianne
+      url: https://ebrianne.technolab.duckdns.org
+    name: cert-manager-webhook-duckdns
+    sources:
+    - https://github.com/ebrianne/cert-manager-webhook-duckdns
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/cert-manager-webhook-duckdns-v1.2.3/cert-manager-webhook-duckdns-v1.2.3.tgz
+    version: v1.2.3
   cockroachdb-operator:
   - apiVersion: v2
     appVersion: 2.1.0
@@ -299,4 +323,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-17T21:24:08.582934916Z"
+generated: "2024-06-29T09:57:59.532439989Z"
