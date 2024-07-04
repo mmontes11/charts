@@ -35,17 +35,19 @@ spec:
             path: /
             port: http
           {{ with .Values.livenessProbe }}
-          {{ toYaml . | nindent 12 }}
+          {{ toYaml . | nindent 10 }}
           {{ end }}
         readinessProbe:
           httpGet:
             path: /
             port: http
           {{ with .Values.readinessProbe }}
-          {{ toYaml . | nindent 12 }}
+          {{ toYaml . | nindent 10 }}
           {{ end }}
+        {{ with .Values.resources }}
         resources:
-          {{ toYaml .Values.resources | nindent 12 }}
+          {{ toYaml . | nindent 10 }}
+        {{ end }}
         ports:
         - containerPort: 2342
           name: http
