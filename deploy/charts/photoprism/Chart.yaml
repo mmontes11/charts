@@ -2,8 +2,8 @@ apiVersion: v2
 name: photoprism
 description: Photoprism by mmontes11
 type: application
-version: 0.5.0
-appVersion: 3.1.0
+version: 0.6.0
+appVersion: "240531"
 maintainers:
   - name: mmontes11
     email: martin11lrx@gmail.com

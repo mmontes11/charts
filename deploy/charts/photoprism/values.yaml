@@ -3,7 +3,7 @@ fullnameOverride: ""
 
 image:
   repository: photoprism/photoprism
-  tag: "221118-jammy"
+  tag: ""
   pullPolicy: IfNotPresent
 
 env:
@@ -85,6 +85,20 @@ httpRoute:
   gatewayRef:
     name: traefik
     namespace: networking
+
+livenessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 30
+  successThreshold: 1
+  failureThreshold: 5
+  timeoutSeconds: 5
+
+readinessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 30
+  successThreshold: 1
+  failureThreshold: 5
+  timeoutSeconds: 5
 
 resources:
   requests:
