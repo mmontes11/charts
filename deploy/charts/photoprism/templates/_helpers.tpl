@@ -101,6 +101,11 @@ Volumes
 - name: storage
   emptyDir: {}
 {{ end }}
+{{ if .Values.videoTranscoding.enabled }}
+- name: video
+  hostPath:
+    path: {{ .Values.videoTranscoding.device }}
+{{ end }}
 {{- end }}
 
 {{/*
@@ -109,6 +114,20 @@ Volume mounts
 {{- define "photoprism.volumeMounts" -}}
 {{ if and .Values.persistence.enabled .Values.persistence.volumes }}
 {{ toYaml .Values.persistence.volumeMounts }}
+{{ end }}
+{{ if .Values.videoTranscoding.enabled }}
+- name: video
+  mountPath: {{ .Values.videoTranscoding.device }}
+{{ end }}
+{{- end }}
+
+{{/*
+Volume mounts
+*/}}
+{{- define "photoprism.securityContext" -}}
+{{ if .Values.videoTranscoding.enabled }}
+securityContext:
+  privileged: true
 {{ end }}
 {{- end }}
 

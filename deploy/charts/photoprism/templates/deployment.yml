@@ -30,6 +30,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{ include "photoprism.envFrom" . | nindent 8 }}
         {{ include "photoprism.env" . | nindent 8 }}
+        {{ include "photoprism.securityContext" . | nindent 8 }}
         livenessProbe:
           httpGet:
             path: /
