@@ -104,6 +104,8 @@ nodeSelector: {}
 
 affinity: {}
 
+priorityClassName: ""
+
 podDisruptionBudget:
   enabled: false
   minAvailable: 1

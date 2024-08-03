@@ -20,10 +20,11 @@ spec:
       nodeSelector:
         {{ toYaml . | nindent 8 }}
       {{ end }}
-      {{ with .Values.sync.affinity }}
+      {{ with .Values.affinity }}
       affinity:
         {{ toYaml . | nindent 12 }}
       {{ end }}
+      priorityClassName: {{ .Values.priorityClassName }}
       containers:
       - name: photoprism
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
