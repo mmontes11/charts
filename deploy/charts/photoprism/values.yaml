@@ -62,14 +62,16 @@ sync:
   resources: {}
   nodeSelector: {}
   affinity: {}
+  tolerations: []
 
 videoTranscoding:
-  enabled: true
+  enabled: false
   device: "/dev/video11"
 
 service:
   type: ClusterIP
   port: 80
+  annotations: {}
 
 ingressRoute:
   enabled: false
@@ -103,6 +105,8 @@ resources: {}
 nodeSelector: {}
 
 affinity: {}
+
+tolerations: []
 
 priorityClassName: ""
 
