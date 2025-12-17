@@ -106,6 +106,12 @@ Volumes
   hostPath:
     path: {{ .Values.videoTranscoding.device }}
 {{ end }}
+{{ if .Values.vision.enabled }}
+{{ $fullName := include "photoprism.fullname" . }}
+- name: vision
+  configMap:
+    name: {{ $fullName }}-vision
+{{ end }}
 {{- end }}
 
 {{/*
@@ -118,6 +124,13 @@ Volume mounts
 {{ if .Values.videoTranscoding.enabled }}
 - name: video
   mountPath: {{ .Values.videoTranscoding.device }}
+{{ end }}
+{{ if .Values.vision.enabled }}
+- name: vision
+  mountPath: {{ .Values.vision.mountPath }}
+  {{ if .Values.vision.subPath }}
+  subPath: {{ .Values.vision.subPath }}
+  {{ end }}
 {{ end }}
 {{- end }}
 

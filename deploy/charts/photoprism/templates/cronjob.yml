@@ -1,14 +1,18 @@
-{{ if .Values.sync.enabled }}
-{{ $volumes := include "photoprism.volumes" . }}
-{{ $volumeMounts := include "photoprism.volumeMounts" . }}
+{{- if .Values.batch.enabled }}
+{{- range .Values.batch.jobs }}
+{{- $jobName := .name }}
+{{- $volumes := include "photoprism.volumes" $ }}
+{{- $volumeMounts := include "photoprism.volumeMounts" $ }}
+{{- $suspend := default false .suspend }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "photoprism.fullname" . }}-sync
+  name: {{ include "photoprism.fullname" $ }}-{{ $jobName }}
   labels:
-    {{ include "photoprism.labels" . | nindent 4 }}
+    {{ include "photoprism.labels" $ | nindent 4 }}
 spec:
-  schedule: {{ .Values.sync.cron | quote }}
+  schedule: {{ .cron | quote }}
+  suspend: {{ $suspend }}
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -17,35 +21,43 @@ spec:
       completions: 1
       template:
         spec:
-          {{ with .Values.sync.nodeSelector }}
+          {{ with $.Values.batch.nodeSelector }}
           nodeSelector:
             {{ toYaml . | nindent 12 }}
           {{ end }}
-          {{ with .Values.sync.affinity }}
+          {{ with $.Values.batch.affinity }}
           affinity:
             {{ toYaml . | nindent 12 }}
           {{ end }}
-          {{ with .Values.sync.tolerations }}
+          {{ with $.Values.batch.tolerations }}
           tolerations:
             {{ toYaml . | nindent 12 }}
           {{ end }}
           restartPolicy: OnFailure
           containers:
           - name: photoprism
-            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+            imagePullPolicy: {{ $.Values.image.pullPolicy }}
+            {{- if .command }}
             command:
-            - photoprism
+            {{- range .command }}
+              - {{ . | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .args }}
             args:
-            - index
-            {{ include "photoprism.envFrom" . | nindent 12 }}
-            {{ include "photoprism.env" . | nindent 12 }}
-            {{ include "photoprism.securityContext" . | nindent 12 }}
-            {{ with .Values.sync.resources }}
+            {{- range .args }}
+              - {{ . | quote }}
+            {{- end }}
+            {{- end }}
+            {{ include "photoprism.envFrom" $ | nindent 12 }}
+            {{ include "photoprism.env" $ | nindent 12 }}
+            {{ include "photoprism.securityContext" $ | nindent 12 }}
+            {{ with $.Values.batch.resources }}
             resources:
               {{ toYaml . | nindent 14 }}
             {{ end }}
-            {{ if $volumeMounts}}
+            {{ if $volumeMounts }}
             volumeMounts:
               {{ $volumeMounts | nindent 14 }}
             {{ end }}
@@ -53,4 +65,6 @@ spec:
           volumes:
             {{ $volumes | nindent 12 }}
           {{ end }}
-{{ end }}
+---
+{{- end }}
+{{- end }}

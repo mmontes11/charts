@@ -56,13 +56,58 @@ database:
     name: photoprism-dsn
     key: dsn
 
-sync:
-  enabled: true
-  cron: "0 */3 * * *"
+batch:
+  enabled: false
+  jobs:
+    - name: vision-labels
+      cron: "*/5 * * * *"
+      suspend: false
+      command:
+        - photoprism
+      args:
+        - vision
+        - run
+        - -m
+        - labels
+        - --count
+        - 1
+        - --force
+    - name: vision-caption
+      cron: "*/5 * * * *"
+      suspend: false
+      command:
+        - photoprism
+      args:
+        - vision
+        - run
+        - -m
+        - caption
+        - --count
+        - 1
+        - --force
   resources: {}
   nodeSelector: {}
   affinity: {}
   tolerations: []
+
+vision:
+  enabled: false
+  mountPath: /photoprism/storage/config/vision.yml
+  subPath: vision.yml
+  config: |
+    Models:
+    - Type: labels
+      Model: gemma3:latest
+      Engine: ollama
+      Run: auto
+      Service:
+        Uri: http://ollama:11434/api/generate
+    - Type: caption
+      Model: gemma3:latest
+      Engine: ollama
+      Run: auto
+      Service:
+        Uri: http://ollama:11434/api/generate
 
 videoTranscoding:
   enabled: false
