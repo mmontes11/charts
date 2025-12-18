@@ -25,7 +25,7 @@ data:
   PHOTOPRISM_IMPORT_PATH: {{ .importPath }}
   PHOTOPRISM_STORAGE_PATH: {{ .storagePath }}
   {{ end }}
-{{ if .Values.vision.enabled }}
+{{ if and .Values.vision.enabled (not .Values.vision.configVolume) }}
 ---
 apiVersion: v1
 kind: ConfigMap

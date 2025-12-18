@@ -94,6 +94,7 @@ vision:
   enabled: false
   mountPath: /photoprism/storage/config/vision.yml
   subPath: vision.yml
+  configVolume: {}
   config: |
     Models:
     - Type: labels

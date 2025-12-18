@@ -106,12 +106,16 @@ Volumes
   hostPath:
     path: {{ .Values.videoTranscoding.device }}
 {{ end }}
-{{ if .Values.vision.enabled }}
-{{ $fullName := include "photoprism.fullname" . }}
+{{- if .Values.vision.enabled }}
 - name: vision
+  {{- if .Values.vision.configVolume }}
+  {{ toYaml .Values.vision.configVolume | nindent 2 }}
+  {{- else }}
+  {{ $fullName := include "photoprism.fullname" . }}
   configMap:
     name: {{ $fullName }}-vision
-{{ end }}
+  {{- end }}
+{{- end }}
 {{- end }}
 
 {{/*
