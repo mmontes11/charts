@@ -230,6 +230,26 @@ entries:
   photoprism:
   - apiVersion: v2
     appVersion: "251130"
+    created: "2026-01-25T17:53:13.847137495Z"
+    description: Photoprism by mmontes11
+    digest: 19572f3eef1034c4990dbe8f9430935c79c9bcc2dec73a1a68b80dbe9c574e60
+    keywords:
+    - photoprism
+    - photos
+    - media
+    - google-photos
+    - ai
+    - ollama
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: photoprism
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/photoprism-0.14.0/photoprism-0.14.0.tgz
+    version: 0.14.0
+  - apiVersion: v2
+    appVersion: "251130"
     created: "2025-12-18T20:42:58.754038209Z"
     description: Photoprism by mmontes11
     digest: 05ef8e376cd93a623f07fb31473581f6b3fcba879f2d826ef2b008f0d76cd6b5
@@ -471,4 +491,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-18T20:42:58.754104953Z"
+generated: "2026-01-25T17:53:13.84720447Z"
