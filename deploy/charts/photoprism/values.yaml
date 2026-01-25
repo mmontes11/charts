@@ -110,10 +110,6 @@ vision:
       Service:
         Uri: http://ollama:11434/api/generate
 
-videoTranscoding:
-  enabled: false
-  device: "/dev/video11"
-
 service:
   type: ClusterIP
   port: 80

@@ -101,11 +101,6 @@ Volumes
 - name: storage
   emptyDir: {}
 {{ end }}
-{{ if .Values.videoTranscoding.enabled }}
-- name: video
-  hostPath:
-    path: {{ .Values.videoTranscoding.device }}
-{{ end }}
 {{- if .Values.vision.enabled }}
 - name: vision
   {{- if .Values.vision.configVolume }}
@@ -125,26 +120,12 @@ Volume mounts
 {{ if and .Values.persistence.enabled .Values.persistence.volumes }}
 {{ toYaml .Values.persistence.volumeMounts }}
 {{ end }}
-{{ if .Values.videoTranscoding.enabled }}
-- name: video
-  mountPath: {{ .Values.videoTranscoding.device }}
-{{ end }}
 {{ if .Values.vision.enabled }}
 - name: vision
   mountPath: {{ .Values.vision.mountPath }}
   {{ if .Values.vision.subPath }}
   subPath: {{ .Values.vision.subPath }}
   {{ end }}
-{{ end }}
-{{- end }}
-
-{{/*
-Volume mounts
-*/}}
-{{- define "photoprism.securityContext" -}}
-{{ if .Values.videoTranscoding.enabled }}
-securityContext:
-  privileged: true
 {{ end }}
 {{- end }}
 
