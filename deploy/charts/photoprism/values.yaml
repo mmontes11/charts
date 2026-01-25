@@ -89,6 +89,8 @@ batch:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  runtimeClassName: ""
+  priorityClassName: ""
 
 vision:
   enabled: false
@@ -149,6 +151,8 @@ nodeSelector: {}
 affinity: {}
 
 tolerations: []
+
+runtimeClassName: ""
 
 priorityClassName: ""
 

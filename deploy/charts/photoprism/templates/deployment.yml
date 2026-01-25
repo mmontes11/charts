@@ -28,6 +28,7 @@ spec:
       tolerations:
         {{ toYaml . | nindent 8 }}
       {{ end }}
+      runtimeClassName: {{ .Values.runtimeClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
       containers:
       - name: photoprism
