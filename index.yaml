@@ -480,6 +480,19 @@ entries:
   tenant:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-05-16T11:58:10.333813425Z"
+    description: Helm chart for bootstrapping a tenant
+    digest: 1e26c192579de3a4da2455c5420240ff2358303b7670f667391a58b6e30f7f06
+    maintainers:
+    - email: martin11lrx@gmail.com
+      name: mmontes11
+    name: tenant
+    type: application
+    urls:
+    - https://github.com/mmontes11/charts/releases/download/tenant-0.2.0/tenant-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-23T18:08:18.133744148Z"
     description: Helm chart for bootstrapping a tenant
     digest: d4e246f615ec10df3f1b5ab726d6779b7371c19f8d6f7ef1fffd6641823d006c
@@ -491,4 +504,4 @@ entries:
     urls:
     - https://github.com/mmontes11/charts/releases/download/tenant-0.1.0/tenant-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-25T17:53:13.84720447Z"
+generated: "2026-05-16T11:58:10.333873949Z"
