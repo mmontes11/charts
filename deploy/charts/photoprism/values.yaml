@@ -154,6 +154,10 @@ tolerations: []
 
 runtimeClassName: ""
 
+# Pod-level DRA wiring (spec.resourceClaims): list of {name, resourceClaimTemplateName}
+# pairs, referenced from the container-level resources.claims.
+resourceClaims: []
+
 priorityClassName: ""
 
 podDisruptionBudget:
